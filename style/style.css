@@ -75,29 +75,25 @@ body {
   margin: 50px auto;
 }
 .todo-container .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 15%;
   display: flex;
-}
-.todo-container .header .info-search {
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+}
+.todo-container .header .info-search {
+  width: 80%;
   height: 100%;
   display: flex;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: center;
 }
 .todo-container .header .info-search .info {
+  width: 25%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
-  width: 300px;
-  height: 100%;
 }
 .todo-container .header .info-search .info .h1 {
   font-family: "Lumanosimo", cursive;
@@ -109,10 +105,11 @@ body {
   color: rgb(228, 225, 221);
 }
 .todo-container .header .info-search .search-bar {
-  position: relative;
+  margin-left: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   width: 500px;
   height: 100%;
   border-radius: 40px;
@@ -128,39 +125,58 @@ body {
   position: absolute;
   right: 20px;
 }
-.todo-container .avatar {
+.todo-container .header .settings {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 20%;
+  height: 100%;
 }
-.todo-container .avatar img {
+.todo-container .header .settings .gear {
+  margin-right: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.todo-container .header .settings .gear i {
+  font-size: 32px;
+  color: rgb(228, 225, 221);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.todo-container .header .settings .gear i:hover {
+  color: rgb(255, 192, 123);
+}
+.todo-container .header .settings img {
   border-radius: 15px;
   width: 60px;
   height: 60px;
 }
 .todo-container .main {
   width: 100%;
-  height: 80%;
+  height: 75%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
-.todo-container .main .options {
+.todo-container .main .category-box {
+  width: 20%;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   align-items: flex-start;
   padding: 25px 30px;
-  width: 300px;
-  height: 100%;
   background-color: rgb(26, 28, 30);
   border-radius: 25px;
 }
-.todo-container .main .options .button {
+.todo-container .main .category-box .button {
   margin-bottom: 10px;
 }
-.todo-container .main .options .new-task {
+.todo-container .main .category-box .new-task {
   width: 100%;
   height: 50px;
   border-radius: 15px;
@@ -171,23 +187,101 @@ body {
   border: none;
   cursor: pointer;
   color: rgb(8, 9, 11);
-  transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s, border 0.3s;
 }
-.todo-container .main .options .new-task:hover {
+.todo-container .main .category-box .new-task:hover {
   color: rgb(255, 192, 123);
   background-color: rgb(26, 28, 30);
   border: 1px solid rgb(255, 192, 123);
 }
-.todo-container .main .tasks {
-  width: auto;
+.todo-container .main .tasks-container {
+  margin-left: 30px;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.todo-container .main .tasks-container .tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 80px;
+}
+.todo-container .main .tasks-container .tasks-header .tasks-name {
+  color: rgb(228, 225, 221);
+  font-size: 22px;
+}
+.todo-container .main .tasks-container .tasks-header .order-button {
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  font-weight: bold;
+  background-color: rgb(26, 28, 30);
+  color: rgb(228, 225, 221);
+  font-size: 16px;
+  border: 1px solid rgb(255, 192, 123);
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s, border 0.3s;
+}
+.todo-container .main .tasks-container .tasks-header .order-button:hover {
+  color: rgb(8, 9, 11);
+  background-color: rgb(255, 192, 123);
+  border: 1px solid rgb(26, 28, 30);
+}
+.todo-container .main .tasks-container .tasks {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   height: 100%;
 }
-.todo-container .main .tasks .task-header {
-  width: 100%;
+.todo-container .main .tasks-container .tasks .task {
+  display: flex;
+  margin: 25px;
+  padding: 18px;
+  max-height: 200px;
+  border-radius: 25px;
+  background-color: rgb(26, 28, 30);
+}
+.todo-container .main .tasks-container .tasks .task .box {
+  width: 15%;
+}
+.todo-container .main .tasks-container .tasks .task .box i {
+  font-size: 20px;
+  color: rgb(228, 225, 221);
+}
+.todo-container .main .tasks-container .tasks .task .task-info {
+  width: 180px;
+}
+.todo-container .main .tasks-container .tasks .task .task-info .task-date {
+  font-size: 11px;
+  color: rgb(228, 225, 221);
+  font-style: italic;
+}
+.todo-container .main .tasks-container .tasks .task .task-info .task-name {
+  margin-top: 10px;
+}
+.todo-container .main .tasks-container .tasks .task .task-info .task-description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(228, 225, 221);
+  font-size: 14px;
+}
+.todo-container .main .tasks-container .tasks .task .task-info img {
+  width: 50px;
+  border-radius: 15px;
+  border: 1px solid rgb(255, 192, 123);
 }
 .todo-container .footer {
   width: 100%;
-  height: 5%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 .todo-container .footer .boxes {
   display: flex;

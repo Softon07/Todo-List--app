@@ -16,25 +16,34 @@
 <body>
 
     <div class="todo-container">
+
         <header class="header">
+
             <div class="info-search">
+
                 <div class="info">
                     <h1 class="h1">Todo</h1>
                     <p class="welcome-text">Welcome to my Todo list</p>
                 </div>
+
                 <div class="search-bar">
                     <input type="text" placeholder="Search here..." class="search">
                     <img src="img/search.svg" alt="search-icon" class="search-icon">
                 </div>
             </div>
 
-            <div class="avatar">
+            <div class="settings">
+                <div class="gear">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
                 <img src="/img/guest.svg" alt="guest-icon">
             </div>
+
         </header>
 
+
         <main class="main">
-            <div class="options">
+            <div class="category-box">
                 <button class="new-task button">+ New Task</button>
                 <button class="button animation"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
                 <button class="button animation"><i class="fa-solid fa-circle-exclamation"></i> Important</button>
@@ -42,23 +51,56 @@
                 <button class="button animation"><i class="fa-solid fa-trash"></i> Removed</button>
             </div>
 
-            <div class="tasks">
+            <div class="tasks-container">
+
                 <div class="tasks-header">
-                    <p class="tasks-name">My tasks</p>
+                    <p class="tasks-name"><i class="fa-solid fa-note-sticky"></i> My tasks</p>
+                    <button class="order-button">Newest <i class="fa-solid fa-chevron-down
+                        "></i></button>
                 </div>
-                <div class="task">task1</div>
+
+                <div class="tasks">
+
+                    <div class="task">
+                        <div class="box"><i class="fa-regular fa-square"></i></div>
+                        <div class="task-info">
+                            <p class="task-date">January 25th 2023 04:25PM</p>
+                            <p class="task-name">car fix & react learning</p>
+                            <p class="task-description">Replair old car and start learning React Now!</p>
+                            <div class="categories">
+                                <div class="important"></div>
+                            </div>
+                            <img src="/img/guest.svg" alt="">
+                        </div>
+                    </div>
+
+                    <div class="task done">
+                        <div class="box"><i class="fa-regular fa-square-check"></i></div>
+                        <div class="task-info">
+                            <p class="task-date">January 22th 2023 02:25PM</p>
+                            <p class="task-name">gym</p>
+                            <p class="task-description">abdominal muscles </p>
+                            <div class="categories">
+                                <div class="important"></div>
+                            </div>
+                            <img src="/img/guest.svg" alt="">
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </main>
 
         <footer class="footer">
+
             <div class="boxes">
                 <button class="box">1</button>
                 <button class="box">2</button>
                 <button class="box">3</button>
             </div>
+
         </footer>
-
-
 
     </div>
 
