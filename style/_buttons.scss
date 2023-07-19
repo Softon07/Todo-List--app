@@ -1,0 +1,40 @@
+@use './colors' as *; 
+.button {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: $light;
+    border: 1px solid transparent;
+    text-decoration: none;
+    background-color: $gray;
+    cursor: pointer;
+}
+
+.button,
+.button::after,
+.button::before {
+    transition: 0.3s;
+}
+
+.animation {
+    z-index: 0;
+}
+
+.animation::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    width: 100%;
+    background-color: white;
+    z-index: -1;
+}
+
+.animation:hover {
+    color: #000;
+}
+
+.animation:hover::after {
+    height: 100%;
+}

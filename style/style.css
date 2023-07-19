@@ -1,0 +1,219 @@
+:root {
+  --main-color: $main-color;
+  --gold: $gold;
+  --purple: $purple;
+  --gray: $gray;
+  --dark: $dark;
+  --light: $light;
+  --blue: $blue;
+  --bg-color: $bg-color;
+}
+
+.button {
+  position: relative;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: rgb(228, 225, 221);
+  border: 1px solid transparent;
+  text-decoration: none;
+  background-color: rgb(26, 28, 30);
+  cursor: pointer;
+}
+
+.button,
+.button::after,
+.button::before {
+  transition: 0.3s;
+}
+
+.animation {
+  z-index: 0;
+}
+
+.animation::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  background-color: white;
+  z-index: -1;
+}
+
+.animation:hover {
+  color: #000;
+}
+
+.animation:hover::after {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+  color: rgb(122, 122, 255);
+  font-family: "Montserrat", sans-serif;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px;
+  display: flex;
+  width: 1400px;
+  height: 800px;
+  border: 1px solid black;
+  background-color: rgb(8, 9, 11);
+  box-shadow: 10px 10px 15px rgb(255, 192, 123);
+  margin: 50px auto;
+}
+.todo-container .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+  display: flex;
+}
+.todo-container .header .info-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: start;
+}
+.todo-container .header .info-search .info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 100%;
+}
+.todo-container .header .info-search .info .h1 {
+  font-family: "Lumanosimo", cursive;
+  color: rgb(255, 192, 123);
+  font-size: 30px;
+}
+.todo-container .header .info-search .info .welcome-text {
+  font-size: 15px;
+  color: rgb(228, 225, 221);
+}
+.todo-container .header .info-search .search-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  border-radius: 40px;
+}
+.todo-container .header .info-search .search-bar .search {
+  width: 100%;
+  border-radius: 40px;
+  padding: 20px;
+  color: rgb(228, 225, 221);
+  background-color: rgb(26, 28, 30);
+}
+.todo-container .header .info-search .search-bar .search-icon {
+  position: absolute;
+  right: 20px;
+}
+.todo-container .avatar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+.todo-container .avatar img {
+  border-radius: 15px;
+  width: 60px;
+  height: 60px;
+}
+.todo-container .main {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.todo-container .main .options {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 25px 30px;
+  width: 300px;
+  height: 100%;
+  background-color: rgb(26, 28, 30);
+  border-radius: 25px;
+}
+.todo-container .main .options .button {
+  margin-bottom: 10px;
+}
+.todo-container .main .options .new-task {
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  background-color: rgb(255, 192, 123);
+  border: none;
+  cursor: pointer;
+  color: rgb(8, 9, 11);
+  transition: color 0.3s, background-color 0.3s;
+}
+.todo-container .main .options .new-task:hover {
+  color: rgb(255, 192, 123);
+  background-color: rgb(26, 28, 30);
+  border: 1px solid rgb(255, 192, 123);
+}
+.todo-container .main .tasks {
+  width: auto;
+  height: 100%;
+}
+.todo-container .main .tasks .task-header {
+  width: 100%;
+}
+.todo-container .footer {
+  width: 100%;
+  height: 5%;
+}
+.todo-container .footer .boxes {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.todo-container .footer .boxes .box {
+  font-family: "Montserrat", sans-serif;
+  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(255, 192, 123);
+  color: rgb(8, 9, 11);
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+  border: 1px solid transparent;
+  font-size: 18px;
+}
+.todo-container .footer .boxes .box:hover {
+  color: rgb(255, 192, 123);
+  background-color: rgb(26, 28, 30);
+  border: 1px solid rgb(255, 192, 123);
+}/*# sourceMappingURL=style.css.map */

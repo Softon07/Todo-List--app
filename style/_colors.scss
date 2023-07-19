@@ -1,0 +1,19 @@
+$main-color: rgb(255, 192, 123);
+$gold: rgb(255, 229, 81);
+$purple: rgb(152, 76, 195);
+$gray: rgb(26, 28, 30);
+$dark: rgb(8, 9, 11);
+$light: rgb(228, 225, 221);
+$blue: rgb(122, 122, 255);
+$bg-color: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+
+:root {
+  --main-color: $main-color;
+  --gold: $gold;
+  --purple: $purple;
+  --gray: $gray;
+  --dark: $dark;
+  --light: $light;
+  --blue: $blue;
+  --bg-color: $bg-color;
+}

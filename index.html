@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lumanosimo&family=Montserrat:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="https://kit.fontawesome.com/b0cb9ad87f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -23,17 +24,29 @@
                 </div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search here..." class="search">
+                    <img src="img/search.svg" alt="search-icon" class="search-icon">
                 </div>
             </div>
 
             <div class="avatar">
-                <img src="/avatar.svg" alt="">
+                <img src="/img/guest.svg" alt="guest-icon">
             </div>
         </header>
 
         <main class="main">
             <div class="options">
-                <button class="new-task">+ new task</button>
+                <button class="new-task button">+ New Task</button>
+                <button class="button animation"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
+                <button class="button animation"><i class="fa-solid fa-circle-exclamation"></i> Important</button>
+                <button class="button animation"><i class="fa-solid fa-check"></i> Completed</button>
+                <button class="button animation"><i class="fa-solid fa-trash"></i> Removed</button>
+            </div>
+
+            <div class="tasks">
+                <div class="tasks-header">
+                    <p class="tasks-name">My tasks</p>
+                </div>
+                <div class="task">task1</div>
             </div>
         </main>
 
@@ -49,7 +62,7 @@
 
     </div>
 
-    <script src="/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
