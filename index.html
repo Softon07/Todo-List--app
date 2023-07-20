@@ -66,11 +66,11 @@
                         <div class="task-info">
                             <p class="task-date">January 25th 2023 04:25PM</p>
                             <p class="task-name">car fix & react learning</p>
-                            <p class="task-description">Replair old car and start learning React Now!</p>
+                            <p class="task-description">Repair old car and start learning React Now!</p>
                             <div class="categories">
                                 <div class="important"></div>
                             </div>
-                            <img src="/img/guest.svg" alt="">
+                            <img src="./img/guest.svg" alt="">
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@
                             <div class="categories">
                                 <div class="important"></div>
                             </div>
-                            <img src="/img/guest.svg" alt="">
+                            <img src="./img/guest.svg" alt="">
                         </div>
                         <div class="done"></div>
                     </div>
@@ -97,7 +97,7 @@
                             <div class="categories">
                                 <div class="important"></div>
                             </div>
-                            <img src="/img/guest.svg" alt="">
+                            <img src="./img/guest.svg" alt="">
                         </div>
                     </div>
 
@@ -115,8 +115,44 @@
             </div>
 
         </footer>
-
     </div>
+
+
+    <div class="modal-shadow">
+        <div class="modal-new-task">
+
+            <p class="modal-title">Add New Task</p>
+
+            <div class="modal-box">
+                <label for="name">Task Name:</label>
+                <input type="text">
+            </div>
+
+            <div class="modal-box">
+                <label for="description">Task Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+
+            <div class="modal-box">
+                <label for="name">Important:</label>
+                <input type="checkbox" class="checkbox">
+            </div>
+
+            <div class="modal-box">
+                <label for="name">Completed:</label>
+                <input type="checkbox" class="checkbox">
+            </div>
+
+            <div class="modal-box modal-box-buttons">
+                <button class="new-task-save-btn new-task-btn">Save</button>
+                <button class="new-task-close-btn new-task-btn">Close</button>
+                <button class="new-task-remove-btn new-task-btn">Remove</button>
+            </div>
+            
+        </div>
+    </div>
+
+
 
     <script src="/js/main.js"></script>
 </body>

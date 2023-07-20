@@ -56,8 +56,13 @@
 }
 
 body {
-  height: 100vh;
-  background: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background: rgb(26, 28, 30);
   color: rgb(122, 122, 255);
   font-family: "Montserrat", sans-serif;
 }
@@ -81,11 +86,11 @@ body {
   z-index: 100;
   margin: -18px;
   border-radius: 25px;
-  cursor: default;
   background-color: rgba(0, 0, 0, 0.6);
 }
 
 .todo-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 15px 30px;
@@ -94,8 +99,9 @@ body {
   height: 800px;
   border: 1px solid black;
   background-color: rgb(8, 9, 11);
+  border-radius: 25px;
   box-shadow: 10px 10px 15px rgb(255, 192, 123);
-  margin: 50px auto;
+  margin: 5vh auto;
 }
 .todo-container .header {
   width: 100%;
@@ -261,6 +267,7 @@ body {
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .todo-container .main .tasks-container .tasks .task {
   position: relative;
@@ -271,6 +278,8 @@ body {
   border-radius: 25px;
   background-color: rgb(26, 28, 30);
   cursor: pointer;
+  border: 1px solid rgb(8, 9, 11);
+  transition: 0.3s;
 }
 .todo-container .main .tasks-container .tasks .task .box {
   width: 15%;
@@ -289,31 +298,63 @@ body {
 }
 .todo-container .main .tasks-container .tasks .task .task-info .task-name {
   margin-top: 10px;
+  max-height: 20px;
+  overflow: hidden;
 }
 .todo-container .main .tasks-container .tasks .task .task-info .task-description {
   margin-top: 10px;
   margin-bottom: 10px;
   color: rgb(228, 225, 221);
   font-size: 14px;
+  max-height: 20px;
+  overflow: hidden;
 }
 .todo-container .main .tasks-container .tasks .task .task-info img {
   width: 50px;
   border-radius: 15px;
-  border: 1px solid rgb(255, 192, 123);
+  border: 1px solid rgb(8, 9, 11);
 }
-.todo-container .footer {
+.todo-container .main .tasks-container .tasks .task:hover {
+  background-color: rgb(255, 192, 123);
+  border: 1px solid rgb(228, 225, 221);
+  transform: scale(1.1);
+}
+.todo-container .main .tasks-container .tasks .task:hover .box i {
+  color: rgb(8, 9, 11);
+}
+.todo-container .main .tasks-container .tasks .task:hover .task-info {
+  width: 180px;
+}
+.todo-container .main .tasks-container .tasks .task:hover .task-info .task-date {
+  font-size: 11px;
+  font-weight: bold;
+  color: rgb(8, 9, 11);
+  font-style: italic;
+}
+.todo-container .main .tasks-container .tasks .task:hover .task-info .task-name {
+  font-weight: bold;
+}
+.todo-container .main .tasks-container .tasks .task:hover .task-info .task-description {
+  color: rgb(8, 9, 11);
+  font-weight: bold;
+}
+.todo-container .main .tasks-container .tasks .task:hover .task-info img {
+  border: 1px solid rgb(8, 9, 11);
+}
+
+.footer {
   width: 100%;
   height: 10%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 }
-.todo-container .footer .boxes {
+.footer .boxes {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.todo-container .footer .boxes .box {
+.footer .boxes .box {
   font-family: "Montserrat", sans-serif;
   margin: 0 15px;
   display: flex;
@@ -331,7 +372,87 @@ body {
   border: 1px solid transparent;
   font-size: 18px;
 }
-.todo-container .footer .boxes .box:hover {
+.footer .boxes .box:hover {
+  color: rgb(255, 192, 123);
+  background-color: rgb(26, 28, 30);
+  border: 1px solid rgb(255, 192, 123);
+}
+
+.modal-shadow {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 999;
+}
+
+.modal-new-task {
+  padding: 10px 35px;
+  position: absolute;
+  width: 750px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(255, 192, 123);
+  border-radius: 25px;
+  z-index: 1000;
+}
+.modal-new-task .modal-title {
+  text-align: center;
+  margin: 25px;
+  font-size: 35px;
+  color: rgb(255, 192, 123);
+}
+.modal-new-task .modal-box {
+  margin: 15px 0 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.modal-new-task .modal-box label {
+  color: rgb(255, 192, 123);
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.modal-new-task .modal-box input,
+.modal-new-task .modal-box textarea {
+  padding: 5px;
+  width: 100%;
+  height: 25px;
+}
+.modal-new-task .modal-box textarea {
+  resize: none;
+  height: 50px;
+}
+.modal-new-task .modal-box .checkbox {
+  width: 25px;
+  cursor: pointer;
+}
+.modal-new-task .modal-box-buttons {
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.modal-new-task .modal-box-buttons .new-task-btn {
+  width: 100px;
+  height: 50px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  background-color: rgb(255, 192, 123);
+  border: none;
+  cursor: pointer;
+  color: rgb(8, 9, 11);
+  transition: color 0.3s, background-color 0.3s, border 0.3s;
+  margin-right: 25px;
+  padding: 10px;
+}
+.modal-new-task .modal-box-buttons .new-task-btn:hover {
   color: rgb(255, 192, 123);
   background-color: rgb(26, 28, 30);
   border: 1px solid rgb(255, 192, 123);
