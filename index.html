@@ -15,103 +15,86 @@
 
 <body>
 
-    <div class="todo-container">
-
+    <div class="todo">
         <header class="header">
-
-            <div class="info-search">
-
-                <div class="info">
-                    <h1 class="h1">Todo</h1>
-                    <p class="welcome-text">Welcome to my Todo list</p>
+            <div class="header__info-box">
+                <div class="header__info">
+                    <h1 class="header__title">Todo</h1>
+                    <p class="header__text">Welcome to my Todo list</p>
                 </div>
-
-                <div class="search-bar">
-                    <input type="text" placeholder="Search here..." class="search">
-                    <img src="img/search.svg" alt="search-icon" class="search-icon">
+                <div class="header__search-bar">
+                    <input type="text" placeholder="Search here..." class="header__search">
+                    <img src="img/search.svg" alt="search-icon" class="header__search-icon">
                 </div>
             </div>
-
-            <div class="settings">
-                <div class="gear">
-                    <i class="fa-solid fa-gear"></i>
+            <div class="header__settings">
+                <div class="header__gear">
+                    <i class="fa-solid fa-gear header__gear-icon"></i>
                 </div>
-                <img src="/img/guest.svg" alt="guest-icon">
+                <img src="/img/guest.svg" alt="guest-icon" class="header__avatar">
             </div>
-
         </header>
 
-
         <main class="main">
-            <div class="category-box">
-                <button class="new-task button">+ New Task</button>
-                <button class="button animation"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
-                <button class="button animation"><i class="fa-solid fa-circle-exclamation"></i> Important</button>
-                <button class="button animation"><i class="fa-solid fa-check"></i> Completed</button>
-                <button class="button animation"><i class="fa-solid fa-trash"></i> Removed</button>
+            <div class="category">
+                <button class="category__new-task category__button">+ New Task</button>
+                <button class="category__button animation"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
+                <button class="category__button animation"><i class="fa-solid fa-circle-exclamation"></i>
+                    Important</button>
+                <button class="category__button animation"><i class="fa-solid fa-check"></i> Completed</button>
+                <button class="category__button animation"><i class="fa-solid fa-trash"></i> Removed</button>
             </div>
 
-            <div class="tasks-container">
+            <div class="tasks-section">
 
-                <div class="tasks-header">
-                    <p class="tasks-name"><i class="fa-solid fa-note-sticky"></i> My tasks</p>
-                    <button class="order-button">Newest <i class="fa-solid fa-chevron-down
+                <div class="header">
+                    <p class="header__name"><i class="fa-solid fa-note-sticky"></i> My tasks</p>
+                    <button class="header__order-button">Newest <i class="fa-solid fa-chevron-down
                         "></i></button>
                 </div>
 
-                <div class="tasks">
+                <div class="tasks-box">
 
                     <div class="task">
-                        <div class="box"><i class="fa-regular fa-square"></i></div>
-                        <div class="task-info">
-                            <p class="task-date">January 25th 2023 04:25PM</p>
-                            <p class="task-name">car fix & react learning</p>
-                            <p class="task-description">Repair old car and start learning React Now!</p>
-                            <div class="categories">
-                                <div class="important"></div>
-                            </div>
-                            <img src="./img/guest.svg" alt="">
+                        <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
+                        <div class="task__info">
+                            <p class="task__date">January 25th 2023 04:25PM</p>
+                            <p class="task__name">car fix & react learning</p>
+                            <p class="task__description">Repair old car and start learning React Now!</p>
+                            <img src="./img/guest.svg" alt="" class="task__avatar">
                         </div>
                     </div>
 
                     <div class="task">
-                        <div class="box"><i class="fa-regular fa-square-check"></i></div>
-                        <div class="task-info">
-                            <p class="task-date">January 22th 2023 02:25PM</p>
-                            <p class="task-name">gym</p>
-                            <p class="task-description">abdominal muscles </p>
-                            <div class="categories">
-                                <div class="important"></div>
-                            </div>
-                            <img src="./img/guest.svg" alt="">
+                        <div class="task__status-box"><i class="fa-regular fa-square-check task__icon"></i></div>
+                        <div class="task__info">
+                            <p class="task__date">January 22th 2023 02:25PM</p>
+                            <p class="task__name">gym</p>
+                            <p class="task__description">abdominal muscles </p>
+                            <img src="./img/guest.svg" alt="" class="task__avatar">
                         </div>
                         <div class="done"></div>
                     </div>
 
                     <div class="task">
-                        <div class="box"><i class="fa-solid fa-exclamation"></i></div>
-                        <div class="task-info">
-                            <p class="task-date">January 22th 2023 02:25PM</p>
-                            <p class="task-name">gym</p>
-                            <p class="task-description">abdominal muscles </p>
-                            <div class="categories">
-                                <div class="important"></div>
-                            </div>
-                            <img src="./img/guest.svg" alt="">
+                        <div class="task__status-box"><i class="fa-solid fa-exclamation task__icon"></i></div>
+                        <div class="task__info">
+                            <p class="task__date">January 22th 2023 02:25PM</p>
+                            <p class="task__name">gym</p>
+                            <p class="task__description">abdominal muscles </p>
+                            <img src="./img/guest.svg" alt="" class="task__avatar">
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </main>
 
         <footer class="footer">
 
-            <div class="boxes">
-                <button class="box">1</button>
-                <button class="box">2</button>
-                <button class="box">3</button>
+            <div class="footer__boxes">
+                <button class="footer__box">1</button>
+                <button class="footer__box">2</button>
+                <button class="footer__box">3</button>
             </div>
 
         </footer>
@@ -121,32 +104,32 @@
     <div class="modal-shadow">
         <div class="modal-new-task">
 
-            <p class="modal-title">Add New Task</p>
+            <p class="modal-new-task__title">Add New Task</p>
 
-            <div class="modal-box">
+            <div class="modal-new-task__box">
                 <label for="name">Task Name:</label>
                 <input type="text">
             </div>
 
-            <div class="modal-box">
+            <div class="modal-new-task__box">
                 <label for="description">Task Description:</label>
                 <textarea name="description" id="description"></textarea>
             </div>
 
-            <div class="modal-box">
+            <div class="modal-new-task__box">
                 <label for="name">Important:</label>
                 <input type="checkbox" class="checkbox">
             </div>
 
-            <div class="modal-box">
+            <div class="modal-new-task__box">
                 <label for="name">Completed:</label>
                 <input type="checkbox" class="checkbox">
             </div>
 
-            <div class="modal-box modal-box-buttons">
-                <button class="new-task-save-btn new-task-btn">Save</button>
-                <button class="new-task-close-btn new-task-btn">Close</button>
-                <button class="new-task-remove-btn new-task-btn">Remove</button>
+            <div class="modal-new-task__box modal-new-task__box-buttons">
+                <button class="new-task-save-btn modal-new-task__new-task-btn">Save</button>
+                <button class="new-task-close-btn modal-new-task__new-task-btn">Close</button>
+                <button class="new-task-remove-btn modal-new-task__new-task-btn">Remove</button>
             </div>
 
         </div>

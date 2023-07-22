@@ -1,5 +1,5 @@
 @use './colors' as *; 
-.button {
+.category__button {
     position: relative;
     padding: 10px 20px;
     font-size: 18px;
@@ -10,9 +10,9 @@
     cursor: pointer;
 }
 
-.button,
-.button::after,
-.button::before {
+.category__button,
+.category__button::after,
+.category__button::before {
     transition: 0.3s;
 }
 
