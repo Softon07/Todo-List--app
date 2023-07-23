@@ -103,6 +103,7 @@ body {
             width: 100%;
             padding: 20px;
             color: $light;
+            border: none;
             border-radius: 40px;
             background-color: $gray;
         }
@@ -383,7 +384,7 @@ body {
 }
 
 .modal-settings-shadow {
-    // display: none;
+    display: none;
 }
 
 .modal {
@@ -482,7 +483,7 @@ body {
 }
 
 .modal-settings {
-    // display: none;
+    display: none;
 
     &__input {
         width: 40%;

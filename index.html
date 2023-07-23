@@ -107,28 +107,27 @@
 
             <div class="modal-new-task__box modal-box">
                 <label for="name" class="modal-label">Task Name:</label>
-                <input type="text" class="modal-input">
+                <input type="text" class="modal-input" id="task-name">
             </div>
 
             <div class="modal-new-task__box modal-box">
-                <label for="description" class="modal-label">Task Description:</label>
-                <textarea name="description" id="description" class="modal-textarea"></textarea>
+                <label for="task-description" class="modal-label">Task Description:</label>
+                <textarea name="task-description" id="task-description" class="modal-textarea"></textarea>
             </div>
 
             <div class="modal-new-task__box modal-box">
                 <label for="name" class="modal-label">Important:</label>
-                <input type="checkbox" class="modal-input modal-checkbox">
+                <input type="checkbox" class="modal-input modal-checkbox" id="important-checkbox">
             </div>
 
             <div class="modal-new-task__box modal-box">
                 <label for="name" class="modal-label">Completed:</label>
-                <input type="checkbox" class="modal-input modal-checkbox">
+                <input type="checkbox" class="modal-input modal-checkbox" id="completed-checkbox">
             </div>
 
             <div class="modal-new-task__box modal-new-task__box-buttons">
                 <button class="new-task-save-btn modal-new-task__new-task-btn">Save</button>
                 <button class="new-task-close-btn modal-new-task__new-task-btn">Close</button>
-                <button class="new-task-remove-btn modal-new-task__new-task-btn">Remove</button>
             </div>
 
         </div>
@@ -157,8 +156,6 @@
 
         </div>
     </div>
-
-
 
     <script src="/js/main.js"></script>
 </body>

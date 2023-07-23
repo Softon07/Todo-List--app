@@ -135,6 +135,7 @@ body {
   width: 100%;
   padding: 20px;
   color: rgb(228, 225, 221);
+  border: none;
   border-radius: 40px;
   background-color: rgb(26, 28, 30);
 }
@@ -375,6 +376,10 @@ body {
   display: none;
 }
 
+.modal-settings-shadow {
+  display: none;
+}
+
 .modal {
   position: absolute;
   z-index: 1000;
@@ -465,6 +470,9 @@ body {
   background-color: rgb(26, 28, 30);
 }
 
+.modal-settings {
+  display: none;
+}
 .modal-settings__input {
   width: 40%;
   height: 35px;
