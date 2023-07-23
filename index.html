@@ -31,7 +31,6 @@
                 <div class="header__gear">
                     <i class="fa-solid fa-gear header__gear-icon"></i>
                 </div>
-                <img src="/img/guest.svg" alt="guest-icon" class="header__avatar">
             </div>
         </header>
 
@@ -61,7 +60,7 @@
                             <p class="task__date">January 25th 2023 04:25PM</p>
                             <p class="task__name">car fix & react learning</p>
                             <p class="task__description">Repair old car and start learning React Now!</p>
-                            <img src="./img/guest.svg" alt="" class="task__avatar">
+                            <p class="task__author">Marcel</p>
                         </div>
                     </div>
 
@@ -71,7 +70,7 @@
                             <p class="task__date">January 22th 2023 02:25PM</p>
                             <p class="task__name">gym</p>
                             <p class="task__description">abdominal muscles </p>
-                            <img src="./img/guest.svg" alt="" class="task__avatar">
+                            <p class="task__author">Jan</p>
                         </div>
                         <div class="done"></div>
                     </div>
@@ -82,7 +81,7 @@
                             <p class="task__date">January 22th 2023 02:25PM</p>
                             <p class="task__name">gym</p>
                             <p class="task__description">abdominal muscles </p>
-                            <img src="./img/guest.svg" alt="" class="task__avatar">
+                            <p class="task__author">Kasiunia Pampunia</p>
                         </div>
                     </div>
                 </div>
@@ -101,35 +100,59 @@
     </div>
 
 
-    <div class="modal-shadow">
-        <div class="modal-new-task">
+    <div class="modal-new-task-shadow">
+        <div class="modal modal-new-task">
 
-            <p class="modal-new-task__title">Add New Task</p>
+            <p class="modal-new-task__title modal-title">Add New Task</p>
 
-            <div class="modal-new-task__box">
-                <label for="name">Task Name:</label>
-                <input type="text">
+            <div class="modal-new-task__box modal-box">
+                <label for="name" class="modal-label">Task Name:</label>
+                <input type="text" class="modal-input">
             </div>
 
-            <div class="modal-new-task__box">
-                <label for="description">Task Description:</label>
-                <textarea name="description" id="description"></textarea>
+            <div class="modal-new-task__box modal-box">
+                <label for="description" class="modal-label">Task Description:</label>
+                <textarea name="description" id="description" class="modal-textarea"></textarea>
             </div>
 
-            <div class="modal-new-task__box">
-                <label for="name">Important:</label>
-                <input type="checkbox" class="checkbox">
+            <div class="modal-new-task__box modal-box">
+                <label for="name" class="modal-label">Important:</label>
+                <input type="checkbox" class="modal-input modal-checkbox">
             </div>
 
-            <div class="modal-new-task__box">
-                <label for="name">Completed:</label>
-                <input type="checkbox" class="checkbox">
+            <div class="modal-new-task__box modal-box">
+                <label for="name" class="modal-label">Completed:</label>
+                <input type="checkbox" class="modal-input modal-checkbox">
             </div>
 
             <div class="modal-new-task__box modal-new-task__box-buttons">
                 <button class="new-task-save-btn modal-new-task__new-task-btn">Save</button>
                 <button class="new-task-close-btn modal-new-task__new-task-btn">Close</button>
                 <button class="new-task-remove-btn modal-new-task__new-task-btn">Remove</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-settings-shadow">
+        <div class="modal modal-settings">
+            <p class="modal-settings__title modal-title">Settings</p>
+
+            <div class="modal-settings__box modal-box">
+                <label for="name" class="modal-label">Author:</label>
+                <input type="text" class="modal-settings__input modal-input">
+            </div>
+            <div class="modal-settings__box modal-settings__box-colors modal-box">
+                <label for="name" class="modal-label">Theme:</label>
+                <div class="modal-settings__color-btns">
+                    <button class="modal-settings__color-btn light-btn"></button>
+                    <button class="modal-settings__color-btn dark-btn"></button>
+                </div>
+            </div>
+
+            <div class="modal-settings__box modal-settings__box-buttons">
+                <button class="modal-settings-save-btn modal-settings__btn">Save</button>
+                <button class="modal-settings-close-btn modal-settings__btn">Close</button>
             </div>
 
         </div>

@@ -167,11 +167,6 @@ body {
 .todo .header__gear-icon:hover {
   color: rgb(255, 192, 123);
 }
-.todo .header__avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 15px;
-}
 .todo .main {
   width: 100%;
   height: 75%;
@@ -297,10 +292,10 @@ body {
   font-size: 14px;
   overflow: hidden;
 }
-.todo .main .tasks-section .tasks-box .task__avatar {
-  width: 50px;
-  border: 1px solid rgb(8, 9, 11);
-  border-radius: 15px;
+.todo .main .tasks-section .tasks-box .task__author {
+  color: rgba(255, 229, 81, 0.582);
+  font-size: 12.5px;
+  font-style: italic;
 }
 .todo .main .tasks-section .tasks-box .task:hover {
   border: 1px solid rgb(228, 225, 221);
@@ -326,8 +321,9 @@ body {
   color: rgb(8, 9, 11);
   font-weight: bold;
 }
-.todo .main .tasks-section .tasks-box .task:hover .task__avatar {
-  border: 1px solid rgb(8, 9, 11);
+.todo .main .tasks-section .tasks-box .task:hover .task__author {
+  color: rgb(8, 9, 11);
+  font-weight: bold;
 }
 
 .footer {
@@ -366,71 +362,90 @@ body {
   background-color: rgb(26, 28, 30);
 }
 
-.show-shadow {
-  display: block;
-}
-
-.modal-shadow {
+.modal-new-task-shadow,
+.modal-settings-shadow {
   position: absolute;
   z-index: 999;
   width: 100%;
   height: 100%;
-  display: none;
   background-color: rgba(0, 0, 0, 0.95);
 }
 
-.modal-new-task {
+.modal-new-task-shadow {
+  display: none;
+}
+
+.modal {
   position: absolute;
   z-index: 1000;
   top: 50%;
   left: 50%;
   width: 750px;
-  height: 500px;
-  padding: 10px 35px;
+  padding: 20px 30px;
   border: 1px solid rgb(255, 192, 123);
   border-radius: 25px;
   transform: translate(-50%, -50%);
 }
-.modal-new-task__title {
+
+.modal-title {
   margin: 25px;
   color: rgb(255, 192, 123);
   font-size: 35px;
   text-align: center;
 }
-.modal-new-task__box {
+
+.modal-box {
   margin: 15px 0 10px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.modal-new-task__box label {
-  margin-bottom: 5px;
+
+.modal-label {
+  margin-bottom: 10px;
   color: rgb(255, 192, 123);
   font-size: 20px;
 }
-.modal-new-task__box input,
-.modal-new-task__box textarea {
+
+.modal-input,
+.modal-textarea {
   width: 100%;
   height: 25px;
   padding: 5px;
 }
-.modal-new-task__box textarea {
+
+.modal-textarea {
   height: 50px;
   resize: none;
 }
-.modal-new-task__box .checkbox {
+
+.modal-checkbox {
   width: 25px;
   cursor: pointer;
 }
+
+.light-btn {
+  border: 1px solid rgb(255, 192, 123);
+  background-color: rgb(228, 225, 221);
+}
+
+.dark-btn {
+  border: 1px solid rgb(255, 192, 123);
+  background-color: rgb(8, 9, 11);
+}
+
+.modal-new-task {
+  display: none;
+}
 .modal-new-task__box-buttons {
   margin-bottom: 0;
-  flex-direction: row;
+  display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 }
 .modal-new-task__new-task-btn {
-  margin-right: 25px;
+  margin-left: 25px;
   width: 100px;
   height: 50px;
   padding: 10px;
@@ -445,6 +460,50 @@ body {
   cursor: pointer;
 }
 .modal-new-task__new-task-btn:hover {
+  color: rgb(255, 192, 123);
+  border: 1px solid rgb(255, 192, 123);
+  background-color: rgb(26, 28, 30);
+}
+
+.modal-settings__input {
+  width: 40%;
+  height: 35px;
+  padding: 10px;
+}
+.modal-settings__color-btns {
+  display: flex;
+  flex-direction: row;
+}
+.modal-settings__color-btn {
+  width: 35px;
+  height: 35px;
+  margin-right: 25px;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-settings__box-buttons {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.modal-settings__btn {
+  margin-left: 25px;
+  width: 100px;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(255, 192, 123);
+  color: rgb(8, 9, 11);
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  transition: color 0.3s, background-color 0.3s, border 0.3s;
+  cursor: pointer;
+}
+.modal-settings__btn:hover {
   color: rgb(255, 192, 123);
   border: 1px solid rgb(255, 192, 123);
   background-color: rgb(26, 28, 30);
