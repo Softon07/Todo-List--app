@@ -473,6 +473,10 @@ body {
 .modal-settings {
   display: none;
 }
+.modal-settings__author {
+  color: rgba(255, 192, 123, 0.3);
+  font-style: italic;
+}
 .modal-settings__input {
   width: 40%;
   height: 35px;

@@ -485,6 +485,11 @@ body {
 .modal-settings {
     display: none;
 
+    &__author {
+        color: rgba($main-color, 0.3);
+        font-style: italic;
+    }
+
     &__input {
         width: 40%;
         height: 35px;
