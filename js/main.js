@@ -39,25 +39,60 @@ const closeNewTaskModal = () => {
     cleanNewTaskModalInputs();
 }
 
+// Date for new task:
+const getFormattedDate = date => {
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    // Konwersja na format 12-godzinny
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    const formattedDate = `${month} ${day}${getDaySuffix(day)} ${year} ${hours}:${minutes}${ampm}`;
+    return formattedDate;
+}
+
+const getDaySuffix = day => {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+
+const currentDate = new Date();
+const taskDate = getFormattedDate(currentDate);
+
 const addNewTask = () => {
 
     taskName.textContent = taskName.value;
     taskDescription.textContent = taskDescription.value;
-
     const newTask = document.createElement('div');
     newTask.classList.add('task');
 
     newTask.innerHTML = `
     <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
     <div class="task__info">
-        <p class="task__date">January 25th 2023 04:25PM</p>
+        <p class="task__date">${taskDate}</p>
         <p class="task__name">${taskName.textContent}</p>
         <p class="task__description">${taskDescription.textContent}</p>
         <p class="task__author">${actualAuthor.textContent}</p>
     </div>
     `
     tasksBox.appendChild(newTask);
-
     closeNewTaskModal();
     cleanNewTaskModalInputs();
 }
