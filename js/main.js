@@ -1,4 +1,5 @@
 // New task - variables
+const tasks = [];
 const newTaskBtn = document.querySelector('.category__new-task');
 const newTaskShadow = document.querySelector('.modal-new-task-shadow');
 const newTaskModal = document.querySelector('.modal-new-task');
@@ -10,6 +11,8 @@ const importantCheckbox = document.querySelector('#important-checkbox');
 const completedCheckbox = document.querySelector('#completed-checkbox');
 const tasksBox = document.querySelector('.tasks-box');
 
+// Edit choosen Task - variables 
+let taskID = 0;
 
 // Settings - variables
 const openSettingsBtn = document.querySelector('.header__gear-icon');
@@ -52,8 +55,6 @@ const getFormattedDate = date => {
     let hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-
-    // Konwersja na format 12-godzinny
     hours = hours % 12;
     hours = hours ? hours : 12;
 
@@ -77,11 +78,13 @@ const currentDate = new Date();
 const taskDate = getFormattedDate(currentDate);
 
 const addNewTask = () => {
+    taskID++;
 
     taskName.textContent = taskName.value;
     taskDescription.textContent = taskDescription.value;
     const newTask = document.createElement('div');
     newTask.classList.add('task');
+    newTask.setAttribute('id', taskID);
 
     newTask.innerHTML = `
     <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
@@ -91,11 +94,37 @@ const addNewTask = () => {
         <p class="task__description">${taskDescription.textContent}</p>
         <p class="task__author">${actualAuthor.textContent}</p>
     </div>
-    `
-    tasksBox.appendChild(newTask);
+    `;
+
+    const taskStatusBox = newTask.querySelector('.task__status-box');
+    if (completedCheckbox.checked || (completedCheckbox.checked && importantCheckbox.checked)) {
+        taskStatusBox.innerHTML = '<i class="fa-regular fa-square-check task__icon"></i>';
+        const divDone = document.createElement('div');
+        divDone.classList.add('done');
+        newTask.appendChild(divDone);
+    } else if (importantCheckbox.checked && !completedCheckbox.checked) {
+        taskStatusBox.innerHTML = '<i class="fa-solid fa-exclamation task__icon"></i>';
+    }
+
+    tasks.push(newTask);
+    updateTasksView();
     closeNewTaskModal();
     cleanNewTaskModalInputs();
 }
+
+const updateTasksView = () => {
+    tasksBox.innerHTML = '';
+
+    tasks.forEach(task => {
+        tasksBox.appendChild(task);
+    })
+}
+
+// Edit choosen Task - functions
+const editTask = event => {
+
+}
+
 
 // Settings - functions
 const openSettingsModal = () => {
@@ -127,6 +156,10 @@ const saveSettings = () => {
 newTaskBtn.addEventListener('click', openNewTaskModal);
 closeTaskBtn.addEventListener('click', closeNewTaskModal);
 saveTaskBtn.addEventListener('click', addNewTask);
+
+// Edit Choosen Task
+
+tasksBox.addEventListener('click', editTask);
 
 // Settings
 openSettingsBtn.addEventListener('click', openSettingsModal);
