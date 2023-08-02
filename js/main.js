@@ -112,23 +112,21 @@ const addNewTask = () => {
     newTask.setAttribute('author', taskData.author);
 
     newTask.innerHTML = `
-    <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
-    <div class="task__info">
-        <p class="task__date">${taskData.date}</p>
-        <p class="task__name">${taskData.name}</p>
-        <p class="task__description">${taskData.description}</p>
-        <p class="task__author">${taskData.author}</p>
-    </div>
+        <div class="task__status-box">${getTaskStatus(taskData)}</div>
+        <div class="task__info">
+            <p class="task__date">${taskData.date}</p>
+            <p class="task__name">${taskData.name}</p>
+            <p class="task__description">${taskData.description}</p>
+            <p class="task__author">${taskData.author}</p>
+        </div>
+        <div class='ifDone'></div>
     `;
 
-    const taskStatusBox = newTask.querySelector('.task__status-box');
-    if (completedCheckbox.checked || (completedCheckbox.checked && importantCheckbox.checked)) {
-        taskStatusBox.innerHTML = '<i class="fa-regular fa-square-check task__icon"></i>';
-        const divDone = document.createElement('div');
-        divDone.classList.add('done');
-        newTask.appendChild(divDone);
-    } else if (importantCheckbox.checked && !completedCheckbox.checked) {
-        taskStatusBox.innerHTML = '<i class="fa-solid fa-exclamation task__icon"></i>';
+    const taskStatus = newTask.querySelector('.task__status-box');
+
+    if (taskStatus.innerHTML === '<i class="fa-regular fa-square-check task__icon"></i>') {
+        const doneDiv = newTask.querySelector('.ifDone');
+        doneDiv.classList.add('done');
     }
 
     tasks.push(newTask);
@@ -138,6 +136,16 @@ const addNewTask = () => {
 
     newTask.addEventListener('click', handleEditTask);
 }
+
+const getTaskStatus = (taskData) => {
+    if (taskData.completed === true) {
+        return '<i class="fa-regular fa-square-check task__icon"></i>';
+    } else if (taskData.important === true) {
+        return '<i class="fa-solid fa-exclamation task__icon"></i>';
+    } else {
+        return '<i class="fa-regular fa-square task__icon"></i>';
+    }
+};
 
 taskName.addEventListener('input', () => {
     const errorParagrapg1 = document.querySelector('.task-name-error');
@@ -166,7 +174,7 @@ const handleEditTask = task => {
     let taskImportant = clickedTask.getAttribute('important');
     let taskCompleted = clickedTask.getAttribute('completed');
     let taskDate = clickedTask.getAttribute('date');
-    let taskAuthor = clickedTask.getAttribute('date');
+    let taskAuthor = clickedTask.getAttribute('author');
 
     const modalEditTaskShadow = document.createElement('div');
     modalEditTaskShadow.classList.add('modal-edit-task-shadow');
@@ -215,10 +223,49 @@ const handleEditTask = task => {
     modalEditTaskShadow.style.display = 'block';
     modalEditTask.style.display = 'block';
 
-
     const saveBtn = modalEditTask.querySelector('.edit-task-save-btn');
     const closeBtn = modalEditTask.querySelector('.edit-task-close-btn');
     const removeBtn = modalEditTask.querySelector('.edit-task-remove-btn');
+
+    saveBtn.addEventListener('click', () => {
+
+        const editedTask = clickedTask.innerHTML;
+        const doneDiv = clickedTask.querySelector('.ifDone');
+        const editedTaskId = clickedTask.id;
+        const taskName = clickedTask.getAttribute('name');
+        const taskDesc = clickedTask.getAttribute('description');
+        const taskImportant = clickedTask.getAttribute('important');
+        const taskCompleted = clickedTask.getAttribute('completed');
+
+        const taskStatus = clickedTask.querySelector('.task__status-box');
+        const importantCheckbox = modalEditTask.querySelector('#important-checkbox');
+        const completedCheckbox = modalEditTask.querySelector('#completed-checkbox');
+
+        if (completedCheckbox.checked && !importantCheckbox.checked || (importantCheckbox.checked && completedCheckbox.checked)) {
+            doneDiv.classList.add('done');
+            taskStatus.innerHTML = '<i class="fa-regular fa-square-check task__icon"></i>';
+            clickedTask.setAttribute('important', 'false');
+            clickedTask.setAttribute('completed', 'true');
+        } else if (importantCheckbox.checked && !completedCheckbox.checked) {
+            taskStatus.innerHTML = '<i class="fa-solid fa-exclamation task__icon"></i>';
+            doneDiv.classList.remove('done');
+            clickedTask.setAttribute('important', 'true');
+            clickedTask.setAttribute('completed', 'false');
+        } else if (!importantCheckbox.checked && !completedCheckbox.checked) {
+            taskStatus.innerHTML = '<i class="fa-regular fa-square task__icon"></i>';
+            doneDiv.classList.remove('done');
+            clickedTask.setAttribute('important', 'false');
+            clickedTask.setAttribute('completed', 'false');
+        }
+
+        console.log(taskCompleted);
+        console.log(taskImportant);
+        console.log(taskStatus.innerHTML);
+
+        modalEditTaskShadow.style.display = 'none';
+        modalEditTask.style.display = 'none';
+        document.body.removeChild(modalEditTaskShadow);
+    });
 
     closeBtn.addEventListener('click', () => {
         modalEditTaskShadow.style.display = 'none';
@@ -241,7 +288,7 @@ const handleEditTask = task => {
         }
 
         document.body.removeChild(modalEditTaskShadow);
-    })
+    });
 
 }
 
