@@ -53,38 +53,6 @@
                 </div>
 
                 <div class="tasks-box">
-
-                    <!-- <div class="task" id="1">
-                        <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
-                        <div class="task__info">
-                            <p class="task__date">January 25th 2023 04:25PM</p>
-                            <p class="task__name">car fix & react learning</p>
-                            <p class="task__description">Repair old car and start learning React Now!</p>
-                            <p class="task__author">Marcel</p>
-                        </div>
-                    </div>
-
-                    <div class="task" id="2">
-                        <div class="task__status-box"><i class="fa-regular fa-square-check task__icon"></i></div>
-                        <div class="task__info">
-                            <p class="task__date">January 22th 2023 02:25PM</p>
-                            <p class="task__name">gym</p>
-                            <p class="task__description">abdominal muscles </p>
-                            <p class="task__author">Jan</p>
-                        </div>
-                        <div class="done"></div>
-                    </div>
-
-                    <div class="task" id="3">
-                        <div class="task__status-box"><i class="fa-solid fa-exclamation task__icon"></i></div>
-                        <div class="task__info">
-                            <p class="task__date">January 22th 2023 02:25PM</p>
-                            <p class="task__name">gym</p>
-                            <p class="task__description">abdominal muscles </p>
-                            <p class="task__author">Kasiunia Pampunia</p>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
         </main>
@@ -107,11 +75,13 @@
             <div class="modal-new-task__box modal-box">
                 <label for="name" class="modal-label">Task Name:</label>
                 <input type="text" class="modal-input" id="task-name">
+                <p class="task-name-error error">This field cannot be empty</p>
             </div>
 
             <div class="modal-new-task__box modal-box">
                 <label for="task-description" class="modal-label">Task Description:</label>
                 <textarea name="task-description" id="task-description" class="modal-textarea"></textarea>
+                <p class="task-desc-error error">This field cannot be empty</p>
             </div>
 
             <div class="modal-new-task__box modal-box">

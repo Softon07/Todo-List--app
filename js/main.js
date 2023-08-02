@@ -1,5 +1,7 @@
-// New task - variables
 const tasks = [];
+let taskID = 0;
+let errors = 0;
+
 const newTaskBtn = document.querySelector('.category__new-task');
 const newTaskShadow = document.querySelector('.modal-new-task-shadow');
 const newTaskModal = document.querySelector('.modal-new-task');
@@ -11,10 +13,6 @@ const importantCheckbox = document.querySelector('#important-checkbox');
 const completedCheckbox = document.querySelector('#completed-checkbox');
 const tasksBox = document.querySelector('.tasks-box');
 
-// Edit choosen Task - variables 
-let taskID = 0;
-
-// Settings - variables
 const openSettingsBtn = document.querySelector('.header__gear-icon');
 const settingsShadow = document.querySelector('.modal-settings-shadow');
 const settingsModal = document.querySelector('.modal-settings');
@@ -23,7 +21,6 @@ const saveSettingsBtn = document.querySelector('.modal-settings-save-btn');
 const closeSettingsBtn = document.querySelector('.modal-settings-close-btn');
 const actualAuthor = document.querySelector('.modal-settings__author');
 
-// New Task - functions
 const openNewTaskModal = () => {
     newTaskShadow.style.display = 'block';
     newTaskModal.style.display = 'block';
@@ -37,12 +34,12 @@ const cleanNewTaskModalInputs = () => {
 }
 
 const closeNewTaskModal = () => {
+
     newTaskShadow.style.display = 'none';
     newTaskModal.style.display = 'none';
     cleanNewTaskModalInputs();
 }
 
-// Date for new task:
 const getFormattedDate = date => {
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June', 'July',
@@ -74,25 +71,53 @@ const getDaySuffix = day => {
     }
 }
 
-const currentDate = new Date();
-const taskDate = getFormattedDate(currentDate);
-
 const addNewTask = () => {
-    taskID++;
+    const nameValue = taskName.value;
+    const descriptionValue = taskDescription.value;
+    const errorParagrapg1 = document.querySelector('.task-name-error');
+    const errorParagrapg2 = document.querySelector('.task-desc-error');
 
-    taskName.textContent = taskName.value;
-    taskDescription.textContent = taskDescription.value;
+    if (nameValue.length === 0) {
+        errorParagrapg1.classList.add('show-error');
+        return;
+    }
+
+    if (descriptionValue.length === 0) {
+        errorParagrapg2.classList.add('show-error');
+        return;
+    }
+
+    taskID++;
+    const currentDate = new Date();
+    const taskDate = getFormattedDate(currentDate);
+
+    const taskData = {
+        id: taskID,
+        name: taskName.value,
+        description: taskDescription.value,
+        important: importantCheckbox.checked,
+        completed: completedCheckbox.checked,
+        date: taskDate,
+        author: actualAuthor.textContent
+    }
+
     const newTask = document.createElement('div');
     newTask.classList.add('task');
-    newTask.setAttribute('id', taskID);
+    newTask.setAttribute('id', taskData.id);
+    newTask.setAttribute('name', taskData.name);
+    newTask.setAttribute('description', taskData.description);
+    newTask.setAttribute('important', taskData.important);
+    newTask.setAttribute('completed', taskData.completed);
+    newTask.setAttribute('date', taskData.date);
+    newTask.setAttribute('author', taskData.author);
 
     newTask.innerHTML = `
     <div class="task__status-box"><i class="fa-regular fa-square task__icon"></i></div>
     <div class="task__info">
-        <p class="task__date">${taskDate}</p>
-        <p class="task__name">${taskName.textContent}</p>
-        <p class="task__description">${taskDescription.textContent}</p>
-        <p class="task__author">${actualAuthor.textContent}</p>
+        <p class="task__date">${taskData.date}</p>
+        <p class="task__name">${taskData.name}</p>
+        <p class="task__description">${taskData.description}</p>
+        <p class="task__author">${taskData.author}</p>
     </div>
     `;
 
@@ -110,7 +135,19 @@ const addNewTask = () => {
     updateTasksView();
     closeNewTaskModal();
     cleanNewTaskModalInputs();
+
+    newTask.addEventListener('click', handleEditTask);
 }
+
+taskName.addEventListener('input', () => {
+    const errorParagrapg1 = document.querySelector('.task-name-error');
+    errorParagrapg1.classList.remove('show-error');
+});
+
+taskDescription.addEventListener('input', () => {
+    const errorParagrapg2 = document.querySelector('.task-desc-error');
+    errorParagrapg2.classList.remove('show-error');
+});
 
 const updateTasksView = () => {
     tasksBox.innerHTML = '';
@@ -120,13 +157,94 @@ const updateTasksView = () => {
     })
 }
 
-// Edit choosen Task - functions
-const editTask = event => {
+const handleEditTask = task => {
+    const clickedTask = task.target.closest('.task');
+
+    let taskId = clickedTask.id;
+    let taskName = clickedTask.getAttribute('name');
+    let taskDesc = clickedTask.getAttribute('description');
+    let taskImportant = clickedTask.getAttribute('important');
+    let taskCompleted = clickedTask.getAttribute('completed');
+    let taskDate = clickedTask.getAttribute('date');
+    let taskAuthor = clickedTask.getAttribute('date');
+
+    const modalEditTaskShadow = document.createElement('div');
+    modalEditTaskShadow.classList.add('modal-edit-task-shadow');
+    const modalEditTask = document.createElement('div');
+    modalEditTask.classList.add('modal');
+    modalEditTask.classList.add('modal-edit-task');
+    modalEditTaskShadow.appendChild(modalEditTask);
+
+    modalEditTask.innerHTML = `
+        <p class="modal-edit-task__title modal-title">Edit Task -> ${taskName}</p>
+
+        <div class="modal-edit-task__box modal-box">
+            <label for="name" class="modal-label">Task Name:</label>
+            <input type="text" class="modal-input" id="task-name" value= ${taskName}>
+        </div>
+
+        <div class="modal-edit-task__box modal-box">
+            <label for="task-description" class="modal-label">Task Description:</label>
+            <textarea name="task-description" id="task-description" class="modal-textarea">${taskDesc}</textarea>
+        </div>
+
+        <div class="modal-edit-task__box modal-box">
+            <label for="name" class="modal-label">Important:</label>
+            <input type="checkbox" class="modal-input modal-checkbox" id="important-checkbox">
+        </div>
+
+        <div class="modal-edit-task__box modal-box">
+            <label for="name" class="modal-label">Completed:</label>
+            <input type="checkbox" class="modal-input modal-checkbox" id="completed-checkbox">
+        </div>
+
+        <div class="modal-edit-task__box modal-edit-task__box-buttons">
+            <button class="edit-task-save-btn modal-edit-task__edit-task-btn">Save</button>
+            <button class="edit-task-close-btn modal-edit-task__edit-task-btn">Close</button>
+            <button class="edit-task-remove-btn modal-edit-task__edit-task-btn">Remove</button>
+        </div>
+    `;
+
+    const importantChecked = modalEditTask.querySelector('#important-checkbox');
+    if (taskImportant == 'true') importantChecked.checked = true;
+
+    const completedChecked = modalEditTask.querySelector('#completed-checkbox');
+    if (taskCompleted == 'true') completedChecked.checked = true;
+
+    document.body.appendChild(modalEditTaskShadow);
+    modalEditTaskShadow.style.display = 'block';
+    modalEditTask.style.display = 'block';
+
+
+    const saveBtn = modalEditTask.querySelector('.edit-task-save-btn');
+    const closeBtn = modalEditTask.querySelector('.edit-task-close-btn');
+    const removeBtn = modalEditTask.querySelector('.edit-task-remove-btn');
+
+    closeBtn.addEventListener('click', () => {
+        modalEditTaskShadow.style.display = 'none';
+        modalEditTask.style.display = 'none';
+        document.body.removeChild(modalEditTaskShadow);
+    })
+
+    removeBtn.addEventListener('click', () => {
+        modalEditTaskShadow.style.display = 'none';
+        modalEditTask.style.display = 'none';
+
+        const parentElement = clickedTask.parentElement;
+        parentElement.removeChild(clickedTask);
+
+        const taskId = clickedTask.id;
+
+        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        if (taskIndex !== -1) {
+            tasks.splice(taskIndex, 1);
+        }
+
+        document.body.removeChild(modalEditTaskShadow);
+    })
 
 }
 
-
-// Settings - functions
 const openSettingsModal = () => {
     settingsShadow.style.display = 'block';
     settingsModal.style.display = 'block';
@@ -143,7 +261,6 @@ const closeSettingsModal = () => {
 }
 
 const saveSettings = () => {
-
     if (authorInput.value === '') {
         actualAuthor.textContent = actualAuthor.textContent;
     } else {
@@ -152,16 +269,10 @@ const saveSettings = () => {
     closeSettingsModal();
 }
 
-// New Task
 newTaskBtn.addEventListener('click', openNewTaskModal);
 closeTaskBtn.addEventListener('click', closeNewTaskModal);
 saveTaskBtn.addEventListener('click', addNewTask);
 
-// Edit Choosen Task
-
-tasksBox.addEventListener('click', editTask);
-
-// Settings
 openSettingsBtn.addEventListener('click', openSettingsModal);
 saveSettingsBtn.addEventListener('click', saveSettings);
 closeSettingsBtn.addEventListener('click', closeSettingsModal);

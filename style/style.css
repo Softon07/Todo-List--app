@@ -363,7 +363,19 @@ body {
   background-color: rgb(26, 28, 30);
 }
 
+.error {
+  visibility: hidden;
+  margin-top: 2px;
+  color: rgba(255, 0, 0, 0.8);
+  font-style: italic;
+}
+
+.show-error {
+  visibility: inherit;
+}
+
 .modal-new-task-shadow,
+.modal-edit-task-shadow,
 .modal-settings-shadow {
   position: absolute;
   z-index: 999;
@@ -373,6 +385,10 @@ body {
 }
 
 .modal-new-task-shadow {
+  display: none;
+}
+
+.modal-edit-task-shadow {
   display: none;
 }
 
@@ -440,16 +456,20 @@ body {
   background-color: rgb(8, 9, 11);
 }
 
-.modal-new-task {
+.modal-new-task,
+.modal-edit-task {
   display: none;
 }
-.modal-new-task__box-buttons {
+.modal-new-task__box-buttons,
+.modal-edit-task__box-buttons {
   margin-bottom: 0;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 }
-.modal-new-task__new-task-btn {
+.modal-new-task__new-task-btn, .modal-new-task__edit-task-btn,
+.modal-edit-task__new-task-btn,
+.modal-edit-task__edit-task-btn {
   margin-left: 25px;
   width: 100px;
   height: 50px;
@@ -464,7 +484,9 @@ body {
   transition: color 0.3s, background-color 0.3s, border 0.3s;
   cursor: pointer;
 }
-.modal-new-task__new-task-btn:hover {
+.modal-new-task__new-task-btn:hover, .modal-new-task__edit-task-btn:hover,
+.modal-edit-task__new-task-btn:hover,
+.modal-edit-task__edit-task-btn:hover {
   color: rgb(255, 192, 123);
   border: 1px solid rgb(255, 192, 123);
   background-color: rgb(26, 28, 30);

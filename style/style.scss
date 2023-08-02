@@ -365,12 +365,22 @@ body {
             background-color: $gray;
         }
     }
-
-
 }
 
 // Modal
+.error {
+    visibility: hidden;
+    margin-top: 2px;
+    color: rgba(255, 0, 0, 0.8);
+    font-style: italic;
+}
+
+.show-error {
+    visibility: inherit;
+}
+
 .modal-new-task-shadow,
+.modal-edit-task-shadow,
 .modal-settings-shadow {
     position: absolute;
     z-index: 999;
@@ -380,6 +390,10 @@ body {
 }
 
 .modal-new-task-shadow {
+    display: none;
+}
+
+.modal-edit-task-shadow {
     display: none;
 }
 
@@ -393,7 +407,6 @@ body {
     top: 50%;
     left: 50%;
     width: 750px;
-    // height: 500px;
     padding: 20px 30px;
     border: 1px solid $main-color;
     border-radius: 25px;
@@ -449,7 +462,8 @@ body {
 }
 
 // Modal-new-task
-.modal-new-task {
+.modal-new-task,
+.modal-edit-task {
     display: none;
 
     &__box-buttons {
@@ -459,7 +473,8 @@ body {
         align-items: flex-end;
     }
 
-    &__new-task-btn {
+    &__new-task-btn,
+    &__edit-task-btn {
         margin-left: 25px;
         width: 100px;
         height: 50px;
@@ -475,7 +490,8 @@ body {
         cursor: pointer;
     }
 
-    &__new-task-btn:hover {
+    &__new-task-btn:hover,
+    &__edit-task-btn:hover {
         color: $main-color;
         border: 1px solid $main-color;
         background-color: $gray;
