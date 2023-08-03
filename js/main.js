@@ -67,11 +67,12 @@ const getFormattedDate = date => {
     const year = date.getFullYear();
     let hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12;
 
-    const formattedDate = `${month} ${day}${getDaySuffix(day)} ${year} ${hours}:${minutes}${ampm}`;
+    const formattedDate = `${month} ${day}${getDaySuffix(day)} ${year} ${hours}:${minutes}:${seconds}${ampm}`;
     return formattedDate;
 }
 
@@ -483,4 +484,3 @@ saveSettingsBtn.addEventListener('click', saveSettings);
 closeSettingsBtn.addEventListener('click', closeSettingsModal);
 
 searchTask.addEventListener('input', searchForTask);
-
