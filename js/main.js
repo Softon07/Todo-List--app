@@ -5,6 +5,7 @@ let numbersOfTasksToShow = 0;
 let numberOFTasksOnPage = 6;
 let taskID = 0;
 let errors = 0;
+let currentPage = 1;
 
 const newTaskBtn = document.querySelector('.category__new-task');
 const newTaskShadow = document.querySelector('.modal-new-task-shadow');
@@ -17,6 +18,11 @@ const importantCheckbox = document.querySelector('#important-checkbox');
 const completedCheckbox = document.querySelector('#completed-checkbox');
 const tasksBox = document.querySelector('.tasks-box');
 const searchTask = document.querySelector('.header__search');
+const headerName = document.querySelector('.header__name');
+
+const footerBoxes = document.querySelector('.footer__boxes');
+const footerBox = document.createElement('button');
+footerBox.classList.add('footer__box');
 
 const openSettingsBtn = document.querySelector('.header__gear-icon');
 const settingsShadow = document.querySelector('.modal-settings-shadow');
@@ -144,11 +150,13 @@ const addNewTask = () => {
     allTasks.push(newTask);
 
     showAllTasks();
+    addFooterBox();
 
     closeNewTaskModal();
     cleanNewTaskModalInputs();
 
     newTask.addEventListener('click', handleEditTask);
+    updateHeaderTitle('My tasks', allTasks.length);
 }
 
 const getTaskStatus = (checkbox) => {
@@ -195,29 +203,42 @@ categoryBtns.forEach(btn => {
     });
 });
 
-const showAllTasks = () => {
-    tasksBox.innerHTML = '';
+const updateHeaderTitle = (categoryName, taskCount) => {
+    let iconClass = "fa-solid fa-note-sticky"; // Domyślna ikona dla wszystkich tasków
+    if (importantTasksCategoryBtn.classList.contains('active')) {
+        categoryName = 'Important';
+        iconClass = "fa-solid fa-circle-exclamation";
+    } else if (completedTasksCategoryBtn.classList.contains('active')) {
+        categoryName = 'Completed';
+        iconClass = "fa-solid fa-check";
+    }
 
-    allTasks.forEach(task => {
-        tasksBox.appendChild(task);
-    })
-}
+    headerName.innerHTML = `<i class="category-icon ${iconClass}"></i> ${categoryName} (${taskCount})`;
+};
+
+
+
+const showAllTasks = () => {
+    currentPage = 1;
+    updateFooterBoxes();
+    addFooterBox();
+    updateHeaderTitle('My tasks', allTasks.length);
+};
 
 const showCompletedTasks = () => {
-    tasksBox.innerHTML = '';
-
-    completedTasks.forEach(task => {
-        tasksBox.appendChild(task);
-    })
-}
+    currentPage = 1;
+    updateFooterBoxes();
+    addFooterBox();
+    updateHeaderTitle('Completed', completedTasks.length);
+};
 
 const showImportantTasks = () => {
-    tasksBox.innerHTML = '';
+    currentPage = 1;
+    updateFooterBoxes();
+    addFooterBox();
+    updateHeaderTitle('Important', importantTasks.length);
+};
 
-    importantTasks.forEach(task => {
-        tasksBox.appendChild(task);
-    })
-}
 
 const handleEditTask = task => {
     const clickedTask = task.target.closest('.task');
@@ -235,7 +256,7 @@ const handleEditTask = task => {
     modalEditTaskShadow.appendChild(modalEditTask);
 
     modalEditTask.innerHTML = `
-        <p class="modal-edit-task__title modal-title">Edit Task -> ${taskName}</p>
+        <p class="modal-edit-task__title modal-title">Edit Task - ${taskName}</p>
 
         <div class="modal-edit-task__box modal-box">
             <label for="name" class="modal-label">Task Name:</label>
@@ -416,8 +437,20 @@ const handleEditTask = task => {
             allTasks.splice(taskIndex, 1);
         }
 
+        const importantIndex = importantTasks.findIndex(task => task.id === taskId);
+        if (importantIndex !== -1) {
+            importantTasks.splice(importantIndex, 1);
+        }
+
+        const completedIndex = completedTasks.findIndex(task => task.id === taskId);
+        if (completedIndex !== -1) {
+            completedTasks.splice(completedIndex, 1);
+        }
+
         document.body.removeChild(modalEditTaskShadow);
+        updateHeaderTitle('My tasks', allTasks.length);
     });
+
 
 }
 
@@ -462,7 +495,6 @@ const searchForTask = () => {
     });
 }
 
-
 myTasksCategoryBtn.addEventListener('click', () => {
     showAllTasks();
 });
@@ -475,6 +507,72 @@ completedTasksCategoryBtn.addEventListener('click', () => {
     showCompletedTasks();
 });
 
+const addFooterBox = () => {
+    let tasksToShow;
+    if (myTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = allTasks;
+    } else if (importantTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = importantTasks;
+    } else if (completedTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = completedTasks;
+    }
+
+    const totalTasks = tasksToShow.length;
+    const totalPages = Math.ceil(totalTasks / numberOFTasksOnPage);
+
+    footerBoxes.innerHTML = '';
+    if (totalPages > 0) {
+        for (let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.classList.add('footer__box');
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => {
+                currentPage = i;
+                updatePageButtons(totalPages);
+                updateFooterBoxes();
+            });
+            footerBoxes.appendChild(pageBtn);
+        }
+    } else {
+        currentPage = 1;
+    }
+
+    updatePageButtons(totalPages);
+};
+
+const updateFooterBoxes = () => {
+    tasksBox.innerHTML = '';
+    let tasksToShow;
+
+    if (myTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = allTasks;
+    } else if (importantTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = importantTasks;
+    } else if (completedTasksCategoryBtn.classList.contains('active')) {
+        tasksToShow = completedTasks;
+    }
+
+    const startIndex = (currentPage - 1) * numberOFTasksOnPage;
+    const endIndex = startIndex + numberOFTasksOnPage;
+
+    tasksToShow.slice(startIndex, endIndex).forEach(task => {
+        tasksBox.appendChild(task);
+    });
+};
+
+const updatePageButtons = totalPages => {
+    const pageButtons = footerBoxes.querySelectorAll('.footer__box');
+    pageButtons.forEach((button, index) => {
+        if (index + 1 <= totalPages) {
+            button.style.display = 'flex';
+        } else {
+            button.style.display = 'none';
+        }
+    });
+};
+
+showAllTasks();
+
 newTaskBtn.addEventListener('click', openNewTaskModal);
 closeTaskBtn.addEventListener('click', closeNewTaskModal);
 saveTaskBtn.addEventListener('click', addNewTask);
@@ -484,3 +582,4 @@ saveSettingsBtn.addEventListener('click', saveSettings);
 closeSettingsBtn.addEventListener('click', closeSettingsModal);
 
 searchTask.addEventListener('input', searchForTask);
+
