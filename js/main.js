@@ -16,6 +16,7 @@ const taskDescription = document.querySelector('#task-description');
 const importantCheckbox = document.querySelector('#important-checkbox');
 const completedCheckbox = document.querySelector('#completed-checkbox');
 const tasksBox = document.querySelector('.tasks-box');
+const searchTask = document.querySelector('.header__search');
 
 const openSettingsBtn = document.querySelector('.header__gear-icon');
 const settingsShadow = document.querySelector('.modal-settings-shadow');
@@ -443,6 +444,23 @@ const saveSettings = () => {
     closeSettingsModal();
 }
 
+const searchForTask = () => {
+    const searchText = searchTask.value.toLowerCase();
+
+    allTasks.forEach(task => {
+        const taskName = task.getAttribute('name').toLowerCase();
+        const taskDescription = task.getAttribute('description').toLowerCase();
+
+        const isMatch = taskName.includes(searchText) || taskDescription.includes(searchText);
+
+        if (isMatch) {
+            task.style.display = 'flex';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+}
+
 
 myTasksCategoryBtn.addEventListener('click', () => {
     showAllTasks();
@@ -463,3 +481,6 @@ saveTaskBtn.addEventListener('click', addNewTask);
 openSettingsBtn.addEventListener('click', openSettingsModal);
 saveSettingsBtn.addEventListener('click', saveSettings);
 closeSettingsBtn.addEventListener('click', closeSettingsModal);
+
+searchTask.addEventListener('input', searchForTask);
+
