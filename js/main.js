@@ -1,4 +1,8 @@
-const tasks = [];
+const allTasks = [];
+const importantTasks = [];
+const completedTasks = [];
+let numbersOfTasksToShow = 0;
+let numberOFTasksOnPage = 6;
 let taskID = 0;
 let errors = 0;
 
@@ -20,6 +24,10 @@ const authorInput = document.querySelector('.settings-author');
 const saveSettingsBtn = document.querySelector('.modal-settings-save-btn');
 const closeSettingsBtn = document.querySelector('.modal-settings-close-btn');
 const actualAuthor = document.querySelector('.modal-settings__author');
+
+// errors
+const errorNameP = document.querySelector('.task-name-error');
+const errorDescP = document.querySelector('.task-desc-error');
 
 const openNewTaskModal = () => {
     newTaskShadow.style.display = 'block';
@@ -72,21 +80,7 @@ const getDaySuffix = day => {
 }
 
 const addNewTask = () => {
-    const nameValue = taskName.value;
-    const descriptionValue = taskDescription.value;
-    const errorParagrapg1 = document.querySelector('.task-name-error');
-    const errorParagrapg2 = document.querySelector('.task-desc-error');
-
-    if (nameValue.length === 0) {
-        errorParagrapg1.classList.add('show-error');
-        return;
-    }
-
-    if (descriptionValue.length === 0) {
-        errorParagrapg2.classList.add('show-error');
-        return;
-    }
-
+    numbersOfTasksToShow++;
     taskID++;
     const currentDate = new Date();
     const taskDate = getFormattedDate(currentDate);
@@ -99,6 +93,18 @@ const addNewTask = () => {
         completed: completedCheckbox.checked,
         date: taskDate,
         author: actualAuthor.textContent
+    }
+
+    // checks name error
+    if (taskData.name.length === 0) {
+        errorNameP.classList.add('show-error');
+        return;
+    }
+
+    // checks description error
+    if (taskData.description.length === 0) {
+        errorDescP.classList.add('show-error');
+        return;
     }
 
     const newTask = document.createElement('div');
@@ -122,14 +128,12 @@ const addNewTask = () => {
         <div class='ifDone'></div>
     `;
 
-    const taskStatus = newTask.querySelector('.task__status-box');
+    let statusOfTask = newTask.setAttribute('status', '');
+    const iconStatus = newTask.querySelector('.task__status-box');
 
-    if (taskStatus.innerHTML === '<i class="fa-regular fa-square-check task__icon"></i>') {
-        const doneDiv = newTask.querySelector('.ifDone');
-        doneDiv.classList.add('done');
-    }
+    setTaskStatus(statusOfTask, iconStatus, newTask);
 
-    tasks.push(newTask);
+    allTasks.push(newTask);
     updateTasksView();
     closeNewTaskModal();
     cleanNewTaskModalInputs();
@@ -137,32 +141,67 @@ const addNewTask = () => {
     newTask.addEventListener('click', handleEditTask);
 }
 
-const getTaskStatus = (taskData) => {
-    if (taskData.completed === true) {
+const getTaskStatus = (checkbox) => {
+    if (checkbox.completed === true) {
         return '<i class="fa-regular fa-square-check task__icon"></i>';
-    } else if (taskData.important === true) {
+    } else if (checkbox.important === true) {
         return '<i class="fa-solid fa-exclamation task__icon"></i>';
     } else {
         return '<i class="fa-regular fa-square task__icon"></i>';
     }
 };
 
+const setTaskStatus = (statusOfTask, Icon, task) => {
+    if (Icon.innerHTML === '<i class="fa-regular fa-square-check task__icon"></i>') {
+        const doneDiv = task.querySelector('.ifDone');
+        doneDiv.classList.add('done');
+        statusOfTask = task.setAttribute('status', 'completedTask');
+        completedTasks.push(task);
+    } else if (Icon.innerHTML === '<i class="fa-solid fa-exclamation task__icon"></i>') {
+        statusOfTask = task.setAttribute('status', 'importantTask');
+        importantTasks.push(task);
+    } else if (Icon.innerHTML === '<i class="fa-regular fa-square task__icon"></i>') {
+        statusOfTask = task.setAttribute('status', 'normalTask');
+    }
+}
+
+// Removes error message when writing something in name input.
 taskName.addEventListener('input', () => {
-    const errorParagrapg1 = document.querySelector('.task-name-error');
-    errorParagrapg1.classList.remove('show-error');
+    errorNameP.classList.remove('show-error');
 });
 
+// Removes error message when writing something in description input.
 taskDescription.addEventListener('input', () => {
-    const errorParagrapg2 = document.querySelector('.task-desc-error');
-    errorParagrapg2.classList.remove('show-error');
+    errorDescP.classList.remove('show-error');
 });
 
 const updateTasksView = () => {
     tasksBox.innerHTML = '';
 
-    tasks.forEach(task => {
+
+    // if choosen category MyNotes then this:
+    allTasks.forEach(task => {
         tasksBox.appendChild(task);
     })
+
+
+
+    // // if choosen category important then this:
+    // if (task.getAttribute('statusOfTask', 'importantTask')) {
+    //     importantTasks.forEach(task => {
+    //         tasksBox.appendChild(task);
+    //     })
+    // }
+
+    // // if choosen category completed then this:
+    // if (task.getAttribute('statusOfTask', 'completedTask')) {
+    //     completedTasks.forEach(task => {
+    //         tasksBox.appendChild(task);
+    //     })
+    // }
+
+
+
 }
 
 const handleEditTask = task => {
@@ -243,12 +282,11 @@ const handleEditTask = task => {
             alert('Task name cannot be empty');
             return;
         }
-    
+
         if (newDescription.trim() === '') {
             alert('Task description cannot be empty');
             return;
         }
-
 
         clickedTask.setAttribute('name', newName);
         clickedTask.setAttribute('description', newDescription);
@@ -279,6 +317,19 @@ const handleEditTask = task => {
         taskNameElement.textContent = newName;
         taskDescriptionElement.textContent = newDescription;
 
+        let statusOfTask = clickedTask.getAttribute('status');
+        const iconStatus = clickedTask.querySelector('.task__status-box');
+        setTaskStatus(statusOfTask, iconStatus, clickedTask);
+
+        if (clickedTask.getAttribute('status') === 'normalTask') {
+            importantTasks.pop(clickedTask);
+            completedTasks.pop(clickedTask);
+        } else if (clickedTask.getAttribute('status') === 'completedTask') {
+            importantTasks.pop(clickedTask);
+        } else if (clickedTask.getAttribute('status') === 'importantTask') {
+            completedTasks.pop(clickedTask);
+        }
+
         modalEditTaskShadow.style.display = 'none';
         modalEditTask.style.display = 'none';
         document.body.removeChild(modalEditTaskShadow);
@@ -291,6 +342,7 @@ const handleEditTask = task => {
     })
 
     removeBtn.addEventListener('click', () => {
+        numbersOfTasksToShow--;
         modalEditTaskShadow.style.display = 'none';
         modalEditTask.style.display = 'none';
 
@@ -299,9 +351,9 @@ const handleEditTask = task => {
 
         const taskId = clickedTask.id;
 
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        const taskIndex = allTasks.findIndex(task => task.id === taskId);
         if (taskIndex !== -1) {
-            tasks.splice(taskIndex, 1);
+            allTasks.splice(taskIndex, 1);
         }
 
         document.body.removeChild(modalEditTaskShadow);
@@ -332,6 +384,15 @@ const saveSettings = () => {
     }
     closeSettingsModal();
 }
+
+// const myTasksCategoryBtn = document.querySelector('.my-tasks');
+// const importantTasksCategoryBtn = document.querySelector('.important');
+// const completedTasksCategoryBtn = document.querySelector('.completed');
+
+// const openChoosenCategoryPageOfTasks = (btn, page) => {
+
+// }
+
 
 newTaskBtn.addEventListener('click', openNewTaskModal);
 closeTaskBtn.addEventListener('click', closeNewTaskModal);

@@ -36,12 +36,10 @@
 
         <main class="main">
             <div class="category">
-                <button class="category__new-task category__button">+ New Task</button>
-                <button class="category__button animation"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
-                <button class="category__button animation"><i class="fa-solid fa-circle-exclamation"></i>
-                    Important</button>
-                <button class="category__button animation"><i class="fa-solid fa-check"></i> Completed</button>
-                <button class="category__button animation"><i class="fa-solid fa-trash"></i> Removed</button>
+                <button class="category__new-task category__button" data-category="New Task">+ New Task</button>
+                <button class="category__button my-tasks animation" data-category="MyTasks"><i class="fa-solid fa-note-sticky"></i> My tasks</button>
+                <button class="category__button important animation" data-category="Important"><i class="fa-solid fa-circle-exclamation"></i> Important</button>
+                <button class="category__button completed animation" data-category="Completed"><i class="fa-solid fa-check"></i> Completed</button>
             </div>
 
             <div class="tasks-section">
@@ -61,8 +59,6 @@
 
             <div class="footer__boxes">
                 <button class="footer__box">1</button>
-                <button class="footer__box">2</button>
-                <button class="footer__box">3</button>
             </div>
         </footer>
     </div>
