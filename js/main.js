@@ -168,13 +168,10 @@ const updateTasksView = () => {
 const handleEditTask = task => {
     const clickedTask = task.target.closest('.task');
 
-    let taskId = clickedTask.id;
     let taskName = clickedTask.getAttribute('name');
     let taskDesc = clickedTask.getAttribute('description');
     let taskImportant = clickedTask.getAttribute('important');
     let taskCompleted = clickedTask.getAttribute('completed');
-    let taskDate = clickedTask.getAttribute('date');
-    let taskAuthor = clickedTask.getAttribute('author');
 
     const modalEditTaskShadow = document.createElement('div');
     modalEditTaskShadow.classList.add('modal-edit-task-shadow');
@@ -189,11 +186,13 @@ const handleEditTask = task => {
         <div class="modal-edit-task__box modal-box">
             <label for="name" class="modal-label">Task Name:</label>
             <input type="text" class="modal-input" id="task-name" value= ${taskName}>
+            <p class="edit-task-name-error error">This field cannot be empty</p>
         </div>
 
         <div class="modal-edit-task__box modal-box">
             <label for="task-description" class="modal-label">Task Description:</label>
             <textarea name="task-description" id="task-description" class="modal-textarea">${taskDesc}</textarea>
+            <p class="edit-task-name-error error">This field cannot be empty</p>
         </div>
 
         <div class="modal-edit-task__box modal-box">
@@ -237,6 +236,23 @@ const handleEditTask = task => {
         const taskImportant = clickedTask.getAttribute('important');
         const taskCompleted = clickedTask.getAttribute('completed');
 
+        const newName = modalEditTask.querySelector('#task-name').value;
+        const newDescription = modalEditTask.querySelector('#task-description').value;
+
+        if (newName.trim() === '') {
+            alert('Task name cannot be empty');
+            return;
+        }
+    
+        if (newDescription.trim() === '') {
+            alert('Task description cannot be empty');
+            return;
+        }
+
+
+        clickedTask.setAttribute('name', newName);
+        clickedTask.setAttribute('description', newDescription);
+
         const taskStatus = clickedTask.querySelector('.task__status-box');
         const importantCheckbox = modalEditTask.querySelector('#important-checkbox');
         const completedCheckbox = modalEditTask.querySelector('#completed-checkbox');
@@ -258,9 +274,10 @@ const handleEditTask = task => {
             clickedTask.setAttribute('completed', 'false');
         }
 
-        console.log(taskCompleted);
-        console.log(taskImportant);
-        console.log(taskStatus.innerHTML);
+        const taskNameElement = clickedTask.querySelector('.task__name');
+        const taskDescriptionElement = clickedTask.querySelector('.task__description');
+        taskNameElement.textContent = newName;
+        taskDescriptionElement.textContent = newDescription;
 
         modalEditTaskShadow.style.display = 'none';
         modalEditTask.style.display = 'none';
