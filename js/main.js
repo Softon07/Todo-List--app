@@ -29,6 +29,13 @@ const actualAuthor = document.querySelector('.modal-settings__author');
 const errorNameP = document.querySelector('.task-name-error');
 const errorDescP = document.querySelector('.task-desc-error');
 
+// category buttons
+const myTasksCategoryBtn = document.querySelector('.my-tasks');
+const importantTasksCategoryBtn = document.querySelector('.important');
+const completedTasksCategoryBtn = document.querySelector('.completed');
+const categoryBtns = [myTasksCategoryBtn, importantTasksCategoryBtn, completedTasksCategoryBtn];
+
+
 const openNewTaskModal = () => {
     newTaskShadow.style.display = 'block';
     newTaskModal.style.display = 'block';
@@ -132,9 +139,10 @@ const addNewTask = () => {
     const iconStatus = newTask.querySelector('.task__status-box');
 
     setTaskStatus(statusOfTask, iconStatus, newTask);
-
     allTasks.push(newTask);
-    updateTasksView();
+
+    showAllTasks();
+
     closeNewTaskModal();
     cleanNewTaskModalInputs();
 
@@ -175,33 +183,38 @@ taskDescription.addEventListener('input', () => {
     errorDescP.classList.remove('show-error');
 });
 
-const updateTasksView = () => {
+// adds highlight color on pressed category button.
+categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        categoryBtns.forEach(otherBtn => {
+            otherBtn.classList.remove('active');
+        });
+        btn.classList.add('active');
+    });
+});
+
+const showAllTasks = () => {
     tasksBox.innerHTML = '';
 
-
-    // if choosen category MyNotes then this:
     allTasks.forEach(task => {
         tasksBox.appendChild(task);
     })
+}
 
+const showCompletedTasks = () => {
+    tasksBox.innerHTML = '';
 
+    completedTasks.forEach(task => {
+        tasksBox.appendChild(task);
+    })
+}
 
-    // // if choosen category important then this:
-    // if (task.getAttribute('statusOfTask', 'importantTask')) {
-    //     importantTasks.forEach(task => {
-    //         tasksBox.appendChild(task);
-    //     })
-    // }
+const showImportantTasks = () => {
+    tasksBox.innerHTML = '';
 
-    // // if choosen category completed then this:
-    // if (task.getAttribute('statusOfTask', 'completedTask')) {
-    //     completedTasks.forEach(task => {
-    //         tasksBox.appendChild(task);
-    //     })
-    // }
-
-
-
+    importantTasks.forEach(task => {
+        tasksBox.appendChild(task);
+    })
 }
 
 const handleEditTask = task => {
@@ -322,12 +335,57 @@ const handleEditTask = task => {
         setTaskStatus(statusOfTask, iconStatus, clickedTask);
 
         if (clickedTask.getAttribute('status') === 'normalTask') {
-            importantTasks.pop(clickedTask);
-            completedTasks.pop(clickedTask);
+            const indexInImportant = importantTasks.indexOf(clickedTask);
+            if (indexInImportant !== -1) {
+                importantTasks.splice(indexInImportant, 1);
+            }
+
+            const indexInCompleted = completedTasks.indexOf(clickedTask);
+            if (indexInCompleted !== -1) {
+                completedTasks.splice(indexInCompleted, 1);
+            }
         } else if (clickedTask.getAttribute('status') === 'completedTask') {
-            importantTasks.pop(clickedTask);
+            const indexInImportant = importantTasks.indexOf(clickedTask);
+            if (indexInImportant !== -1) {
+                importantTasks.splice(indexInImportant, 1);
+            }
         } else if (clickedTask.getAttribute('status') === 'importantTask') {
-            completedTasks.pop(clickedTask);
+            const indexInCompleted = completedTasks.indexOf(clickedTask);
+            if (indexInCompleted !== -1) {
+                completedTasks.splice(indexInCompleted, 1);
+            }
+        }
+
+
+        if (completedChecked.checked && !importantChecked.checked || (importantChecked.checked && completedChecked.checked)) {
+            if (!completedTasks.includes(clickedTask)) {
+                completedTasks.push(clickedTask);
+            }
+            if (importantTasks.includes(clickedTask)) {
+                importantTasks.splice(importantTasks.indexOf(clickedTask), 1);
+            }
+        } else if (importantChecked.checked && !completedChecked.checked) {
+            if (!importantTasks.includes(clickedTask)) {
+                importantTasks.push(clickedTask);
+            }
+            if (completedTasks.includes(clickedTask)) {
+                completedTasks.splice(completedTasks.indexOf(clickedTask), 1);
+            }
+        } else if (!importantChecked.checked && !completedChecked.checked) {
+            if (importantTasks.includes(clickedTask)) {
+                importantTasks.splice(importantTasks.indexOf(clickedTask), 1);
+            }
+            if (completedTasks.includes(clickedTask)) {
+                completedTasks.splice(completedTasks.indexOf(clickedTask), 1);
+            }
+        }
+
+        if (myTasksCategoryBtn.classList.contains('active')) {
+            showAllTasks();
+        } else if (importantTasksCategoryBtn.classList.contains('active')) {
+            showImportantTasks();
+        } else if (completedTasksCategoryBtn.classList.contains('active')) {
+            showCompletedTasks();
         }
 
         modalEditTaskShadow.style.display = 'none';
@@ -385,14 +443,18 @@ const saveSettings = () => {
     closeSettingsModal();
 }
 
-// const myTasksCategoryBtn = document.querySelector('.my-tasks');
-// const importantTasksCategoryBtn = document.querySelector('.important');
-// const completedTasksCategoryBtn = document.querySelector('.completed');
 
-// const openChoosenCategoryPageOfTasks = (btn, page) => {
+myTasksCategoryBtn.addEventListener('click', () => {
+    showAllTasks();
+});
 
-// }
+importantTasksCategoryBtn.addEventListener('click', () => {
+    showImportantTasks();
+});
 
+completedTasksCategoryBtn.addEventListener('click', () => {
+    showCompletedTasks();
+});
 
 newTaskBtn.addEventListener('click', openNewTaskModal);
 closeTaskBtn.addEventListener('click', closeNewTaskModal);
