@@ -572,17 +572,6 @@ const updatePageButtons = totalPages => {
 const lightBtn = document.querySelector('.light-btn');
 const darkBtn = document.querySelector('.dark-btn');
 
-// --main - color: rgb(0, 102, 255);
-// --gold: rgba(255, 229, 81, 0.582);
-// --purple: rgb(152, 76, 195);
-// --gray: rgb(240, 240, 240);
-// --dark: rgb(255, 255, 255);
-// --light: rgb(51, 51, 51);
-// --blue: rgb(0, 102, 255);
-// --bg - color: linear - gradient(-20deg, #00cdac 0 %, #8ddad5 100 %);
-// --red: rgb(218, 34, 34);
-// --green: rgb(43, 247, 43);
-
 const setLightTheme = () => {
     document.documentElement.style.setProperty('--main-color', 'rgb(0, 102, 255)');
     document.documentElement.style.setProperty('--gold', 'rgba(0, 0, 0, 0.582');
@@ -623,4 +612,3 @@ closeSettingsBtn.addEventListener('click', closeSettingsModal);
 searchTask.addEventListener('input', searchForTask);
 lightBtn.addEventListener('click', setLightTheme);
 darkBtn.addEventListener('click', setDarkTheme);
-
