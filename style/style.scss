@@ -1,5 +1,20 @@
-@use './colors' as *;
+// @use './colors' as *;
 @use './buttons' as *;
+
+:root {
+    --main-color: rgb(255, 192, 123);
+    --gold: rgba(255, 229, 81, 0.582);
+    --purple: rgb(152, 76, 195);
+    --gray: rgb(26, 28, 30);
+    --dark: rgb(8, 9, 11);
+    --light: rgb(228, 225, 221);
+    --blue: rgb(122, 122, 255);
+    --bg-color: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+    --red: rgb(218, 34, 34);
+    --green: rgb(43, 247, 43);
+    --dark-shadow: rgba(0, 0, 0, 0.8);
+}
+
 
 * {
     box-sizing: border-box;
@@ -15,20 +30,20 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
-    background: $gray;
-    color: $blue;
+    background: var(--gray);
+    color: var(--blue);
 }
 
 .fa-exclamation,
 .fa-exclamation::before,
 .fa-exclamation::after {
-    color: $red;
+    color: var(--red);
 }
 
 .fa-square-check,
 .fa-square-check::before,
 .fa-square-check::after {
-    color: $green;
+    color: var(--green);
 }
 
 .done {
@@ -50,9 +65,9 @@ body {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
-    background-color: $dark;
+    background-color: var(--dark);
     border-radius: 25px;
-    box-shadow: 10px 10px 15px $main-color;
+    box-shadow: 10px 10px 15px var(--main-color);
 
     .header {
         width: 100%;
@@ -78,13 +93,13 @@ body {
         }
 
         &__title {
-            color: $main-color;
+            color: var(--main-color);
             font-family: 'Lumanosimo', cursive;
             font-size: 30px;
         }
 
         &__text {
-            color: $light;
+            color: var(--light);
             font-size: 15px;
         }
 
@@ -102,10 +117,10 @@ body {
         &__search {
             width: 100%;
             padding: 20px;
-            color: $light;
+            color: var(--light);
             border: none;
             border-radius: 40px;
-            background-color: $gray;
+            background-color: var(--gray);
         }
 
         &__search-icon {
@@ -132,14 +147,14 @@ body {
         }
 
         &__gear-icon {
-            color: $light;
+            color: var(--light);
             font-size: 32px;
             transition: color 0.3s;
             cursor: pointer;
         }
 
         &__gear-icon:hover {
-            color: $main-color;
+            color: var(--main-color);
         }
     }
 
@@ -158,7 +173,7 @@ body {
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            background-color: $gray;
+            background-color: var(--gray);
             border-radius: 25px;
 
             &__button {
@@ -170,8 +185,8 @@ body {
                 height: 50px;
                 border: none;
                 border-radius: 15px;
-                background-color: $main-color;
-                color: $dark;
+                background-color: var(--main-color);
+                color: var(--dark);
                 font-family: 'Montserrat', sans-serif;
                 font-size: 15px;
                 font-weight: bold;
@@ -180,9 +195,9 @@ body {
             }
 
             &__new-task:hover {
-                color: $main-color;
-                border: 1px solid $main-color;
-                background-color: $gray;
+                color: var(--main-color);
+                border: 1px solid var(--main-color);
+                background-color: var(--gray);
             }
         }
 
@@ -204,17 +219,17 @@ body {
                 align-items: center;
 
                 &__name {
-                    color: $light;
+                    color: var(--light);
                     font-size: 22px;
                 }
 
                 &__order-button {
                     width: 120px;
                     height: 40px;
-                    border: 1px solid $main-color;
+                    border: 1px solid var(--main-color);
                     border-radius: 15px;
-                    background-color: $gray;
-                    color: $light;
+                    background-color: var(--gray);
+                    color: var(--light);
                     font-family: 'Montserrat', sans-serif;
                     font-weight: bold;
                     font-size: 16px;
@@ -223,9 +238,9 @@ body {
                 }
 
                 &__order-button:hover {
-                    color: $dark;
-                    border: 1px solid $gray;
-                    background-color: $main-color;
+                    color: var(--dark);
+                    border: 1px solid var(--gray);
+                    background-color: var(--main-color);
                 }
             }
 
@@ -242,9 +257,9 @@ body {
                     margin: 25px;
                     padding: 18px;
                     display: flex;
-                    border: 1px solid $dark;
+                    border: 1px solid var(--dark);
                     border-radius: 25px;
-                    background-color: $gray;
+                    background-color: var(--gray);
                     transition: 0.3s;
                     cursor: pointer;
 
@@ -253,7 +268,7 @@ body {
                     }
 
                     &__icon {
-                        color: $light;
+                        color: var(--light);
                         font-size: 20px;
                     }
 
@@ -262,7 +277,7 @@ body {
                     }
 
                     &__date {
-                        color: $light;
+                        color: var(--light);
                         font-size: 11px;
                         font-style: italic;
                     }
@@ -277,25 +292,25 @@ body {
                         max-height: 20px;
                         margin-top: 10px;
                         margin-bottom: 10px;
-                        color: $light;
+                        color: var(--light);
                         font-size: 14px;
                         overflow: hidden;
                     }
 
                     &__author {
-                        color: $gold;
+                        color: var(--gold);
                         font-size: 12.5px;
                         font-style: italic;
                     }
                 }
 
                 .task:hover {
-                    border: 1px solid $light;
-                    background-color: $main-color;
+                    border: 1px solid var(--light);
+                    background-color: var(--main-color);
                     transform: scale(1.1);
 
                     .task__icon {
-                        color: $dark;
+                        color: var(--dark);
                     }
 
                     .task__info {
@@ -303,24 +318,21 @@ body {
                     }
 
                     .task__date {
-                        color: $dark;
+                        color: var(--dark);
                         font-size: 11px;
-                        font-weight: bold;
                         font-style: italic;
                     }
 
                     .task__name {
-                        font-weight: bold;
+                        color: var(--dark);
                     }
 
                     .task__description {
-                        color: $dark;
-                        font-weight: bold;
+                        color: var(--dark);
                     }
 
                     .task__author {
-                        color: $dark;
-                        font-weight: bold;
+                        color: var(--dark);
                     }
                 }
             }
@@ -351,8 +363,8 @@ body {
         align-items: center;
         border: 1px solid transparent;
         border-radius: 15px;
-        background-color: $main-color;
-        color: $dark;
+        background-color: var(--main-color);
+        color: var(--dark);
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
         font-weight: bold;
@@ -360,9 +372,9 @@ body {
         cursor: pointer;
 
         &:hover {
-            color: $main-color;
-            border: 1px solid $main-color;
-            background-color: $gray;
+            color: var(--main-color);
+            border: 1px solid var(--main-color);
+            background-color: var(--gray);
         }
     }
 }
@@ -386,7 +398,7 @@ body {
     z-index: 999;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: var(--dark-shadow);
 }
 
 .modal-new-task-shadow {
@@ -408,14 +420,14 @@ body {
     left: 50%;
     width: 750px;
     padding: 20px 30px;
-    border: 1px solid $main-color;
+    border: 1px solid var(--main-color);
     border-radius: 25px;
     transform: translate(-50%, -50%);
 }
 
 .modal-title {
     margin: 25px;
-    color: $main-color;
+    color: var(--main-color);
     font-size: 35px;
     text-align: center;
 }
@@ -430,7 +442,7 @@ body {
 
 .modal-label {
     margin-bottom: 10px;
-    color: $main-color;
+    color: var(--main-color);
     font-size: 20px;
 }
 
@@ -439,6 +451,7 @@ body {
     width: 100%;
     height: 25px;
     padding: 5px;
+    border: 1px solid var(--light);
 }
 
 .modal-textarea {
@@ -452,13 +465,15 @@ body {
 }
 
 .light-btn {
-    border: 1px solid $main-color;
-    background-color: $light;
+    color: rgb(0, 102, 255);
+    border: 1px solid rgb(0, 102, 255);
+    background-color: rgb(228, 225, 221);
 }
 
 .dark-btn {
-    border: 1px solid $main-color;
-    background-color: $dark;
+    color: rgb(255, 192, 123);
+    border: 1px solid rgb(255, 192, 123);
+    background-color: rgb(8, 9, 11);
 }
 
 // Modal-new-task
@@ -481,8 +496,8 @@ body {
         padding: 10px;
         border: none;
         border-radius: 15px;
-        background-color: $main-color;
-        color: $dark;
+        background-color: var(--main-color);
+        color: var(--dark);
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         font-size: 15px;
@@ -492,9 +507,9 @@ body {
 
     &__new-task-btn:hover,
     &__edit-task-btn:hover {
-        color: $main-color;
-        border: 1px solid $main-color;
-        background-color: $gray;
+        color: var(--main-color);
+        border: 1px solid var(--main-color);
+        background-color: var(--gray);
     }
 }
 
@@ -502,7 +517,7 @@ body {
     display: none;
 
     &__author {
-        color: rgba($main-color, 0.3);
+        color: rgba(var(--main-color), 0.3);
         font-style: italic;
     }
 
@@ -540,8 +555,8 @@ body {
         padding: 10px;
         border: none;
         border-radius: 15px;
-        background-color: $main-color;
-        color: $dark;
+        background-color: var(--main-color);
+        color: var(--dark);
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
         font-size: 15px;
@@ -551,12 +566,12 @@ body {
 
 
     &__btn:hover {
-        color: $main-color;
-        border: 1px solid $main-color;
-        background-color: $gray;
+        color: var(--main-color);
+        border: 1px solid var(--main-color);
+        background-color: var(--gray);
     }
 }
 
 .active {
-    color: $main-color;
+    color: var(--main-color);
 }

@@ -1,12 +1,13 @@
-@use './colors' as *; 
+// @use './colors' as *; 
+
 .category__button {
     position: relative;
     padding: 10px 20px;
     font-size: 18px;
-    color: $light;
+    color: var(--light);
     border: 1px solid transparent;
     text-decoration: none;
-    background-color: $gray;
+    background-color: var(--gray);
     cursor: pointer;
 }
 

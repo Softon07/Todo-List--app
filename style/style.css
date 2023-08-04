@@ -2,10 +2,10 @@
   position: relative;
   padding: 10px 20px;
   font-size: 18px;
-  color: rgb(228, 225, 221);
+  color: var(--light);
   border: 1px solid transparent;
   text-decoration: none;
-  background-color: rgb(26, 28, 30);
+  background-color: var(--gray);
   cursor: pointer;
 }
 
@@ -38,6 +38,20 @@
   height: 100%;
 }
 
+:root {
+  --main-color: rgb(255, 192, 123);
+  --gold: rgba(255, 229, 81, 0.582);
+  --purple: rgb(152, 76, 195);
+  --gray: rgb(26, 28, 30);
+  --dark: rgb(8, 9, 11);
+  --light: rgb(228, 225, 221);
+  --blue: rgb(122, 122, 255);
+  --bg-color: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+  --red: rgb(218, 34, 34);
+  --green: rgb(43, 247, 43);
+  --dark-shadow: rgba(0, 0, 0, 0.8);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -52,20 +66,20 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  background: rgb(26, 28, 30);
-  color: rgb(122, 122, 255);
+  background: var(--gray);
+  color: var(--blue);
 }
 
 .fa-exclamation,
 .fa-exclamation::before,
 .fa-exclamation::after {
-  color: rgb(218, 34, 34);
+  color: var(--red);
 }
 
 .fa-square-check,
 .fa-square-check::before,
 .fa-square-check::after {
-  color: rgb(43, 247, 43);
+  color: var(--green);
 }
 
 .done {
@@ -87,9 +101,9 @@ body {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-  background-color: rgb(8, 9, 11);
+  background-color: var(--dark);
   border-radius: 25px;
-  box-shadow: 10px 10px 15px rgb(255, 192, 123);
+  box-shadow: 10px 10px 15px var(--main-color);
 }
 .todo .header {
   width: 100%;
@@ -113,12 +127,12 @@ body {
   align-items: flex-start;
 }
 .todo .header__title {
-  color: rgb(255, 192, 123);
+  color: var(--main-color);
   font-family: "Lumanosimo", cursive;
   font-size: 30px;
 }
 .todo .header__text {
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 15px;
 }
 .todo .header__search-bar {
@@ -134,10 +148,10 @@ body {
 .todo .header__search {
   width: 100%;
   padding: 20px;
-  color: rgb(228, 225, 221);
+  color: var(--light);
   border: none;
   border-radius: 40px;
-  background-color: rgb(26, 28, 30);
+  background-color: var(--gray);
 }
 .todo .header__search-icon {
   position: absolute;
@@ -160,13 +174,13 @@ body {
   align-items: flex-end;
 }
 .todo .header__gear-icon {
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 32px;
   transition: color 0.3s;
   cursor: pointer;
 }
 .todo .header__gear-icon:hover {
-  color: rgb(255, 192, 123);
+  color: var(--main-color);
 }
 .todo .main {
   width: 100%;
@@ -183,7 +197,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: rgb(26, 28, 30);
+  background-color: var(--gray);
   border-radius: 25px;
 }
 .todo .main .category__button {
@@ -194,8 +208,8 @@ body {
   height: 50px;
   border: none;
   border-radius: 15px;
-  background-color: rgb(255, 192, 123);
-  color: rgb(8, 9, 11);
+  background-color: var(--main-color);
+  color: var(--dark);
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
   font-weight: bold;
@@ -203,9 +217,9 @@ body {
   cursor: pointer;
 }
 .todo .main .category__new-task:hover {
-  color: rgb(255, 192, 123);
-  border: 1px solid rgb(255, 192, 123);
-  background-color: rgb(26, 28, 30);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  background-color: var(--gray);
 }
 .todo .main .tasks-section {
   width: 80%;
@@ -225,16 +239,16 @@ body {
   align-items: center;
 }
 .todo .main .tasks-section .header__name {
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 22px;
 }
 .todo .main .tasks-section .header__order-button {
   width: 120px;
   height: 40px;
-  border: 1px solid rgb(255, 192, 123);
+  border: 1px solid var(--main-color);
   border-radius: 15px;
-  background-color: rgb(26, 28, 30);
-  color: rgb(228, 225, 221);
+  background-color: var(--gray);
+  color: var(--light);
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 16px;
@@ -242,9 +256,9 @@ body {
   cursor: pointer;
 }
 .todo .main .tasks-section .header__order-button:hover {
-  color: rgb(8, 9, 11);
-  border: 1px solid rgb(26, 28, 30);
-  background-color: rgb(255, 192, 123);
+  color: var(--dark);
+  border: 1px solid var(--gray);
+  background-color: var(--main-color);
 }
 .todo .main .tasks-section .tasks-box {
   width: 100%;
@@ -259,9 +273,9 @@ body {
   margin: 25px;
   padding: 18px;
   display: flex;
-  border: 1px solid rgb(8, 9, 11);
+  border: 1px solid var(--dark);
   border-radius: 25px;
-  background-color: rgb(26, 28, 30);
+  background-color: var(--gray);
   transition: 0.3s;
   cursor: pointer;
 }
@@ -269,14 +283,14 @@ body {
   width: 15%;
 }
 .todo .main .tasks-section .tasks-box .task__icon {
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 20px;
 }
 .todo .main .tasks-section .tasks-box .task__info {
   width: 180px;
 }
 .todo .main .tasks-section .tasks-box .task__date {
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 11px;
   font-style: italic;
 }
@@ -289,42 +303,39 @@ body {
   max-height: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  color: rgb(228, 225, 221);
+  color: var(--light);
   font-size: 14px;
   overflow: hidden;
 }
 .todo .main .tasks-section .tasks-box .task__author {
-  color: rgba(255, 229, 81, 0.582);
+  color: var(--gold);
   font-size: 12.5px;
   font-style: italic;
 }
 .todo .main .tasks-section .tasks-box .task:hover {
-  border: 1px solid rgb(228, 225, 221);
-  background-color: rgb(255, 192, 123);
+  border: 1px solid var(--light);
+  background-color: var(--main-color);
   transform: scale(1.1);
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__icon {
-  color: rgb(8, 9, 11);
+  color: var(--dark);
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__info {
   width: 180px;
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__date {
-  color: rgb(8, 9, 11);
+  color: var(--dark);
   font-size: 11px;
-  font-weight: bold;
   font-style: italic;
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__name {
-  font-weight: bold;
+  color: var(--dark);
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__description {
-  color: rgb(8, 9, 11);
-  font-weight: bold;
+  color: var(--dark);
 }
 .todo .main .tasks-section .tasks-box .task:hover .task__author {
-  color: rgb(8, 9, 11);
-  font-weight: bold;
+  color: var(--dark);
 }
 
 .footer {
@@ -349,8 +360,8 @@ body {
   align-items: center;
   border: 1px solid transparent;
   border-radius: 15px;
-  background-color: rgb(255, 192, 123);
-  color: rgb(8, 9, 11);
+  background-color: var(--main-color);
+  color: var(--dark);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -358,9 +369,9 @@ body {
   cursor: pointer;
 }
 .footer__box:hover {
-  color: rgb(255, 192, 123);
-  border: 1px solid rgb(255, 192, 123);
-  background-color: rgb(26, 28, 30);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  background-color: var(--gray);
 }
 
 .error {
@@ -381,7 +392,7 @@ body {
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: var(--dark-shadow);
 }
 
 .modal-new-task-shadow {
@@ -403,14 +414,14 @@ body {
   left: 50%;
   width: 750px;
   padding: 20px 30px;
-  border: 1px solid rgb(255, 192, 123);
+  border: 1px solid var(--main-color);
   border-radius: 25px;
   transform: translate(-50%, -50%);
 }
 
 .modal-title {
   margin: 25px;
-  color: rgb(255, 192, 123);
+  color: var(--main-color);
   font-size: 35px;
   text-align: center;
 }
@@ -425,7 +436,7 @@ body {
 
 .modal-label {
   margin-bottom: 10px;
-  color: rgb(255, 192, 123);
+  color: var(--main-color);
   font-size: 20px;
 }
 
@@ -434,6 +445,7 @@ body {
   width: 100%;
   height: 25px;
   padding: 5px;
+  border: 1px solid var(--light);
 }
 
 .modal-textarea {
@@ -447,11 +459,13 @@ body {
 }
 
 .light-btn {
-  border: 1px solid rgb(255, 192, 123);
+  color: rgb(0, 102, 255);
+  border: 1px solid rgb(0, 102, 255);
   background-color: rgb(228, 225, 221);
 }
 
 .dark-btn {
+  color: rgb(255, 192, 123);
   border: 1px solid rgb(255, 192, 123);
   background-color: rgb(8, 9, 11);
 }
@@ -476,8 +490,8 @@ body {
   padding: 10px;
   border: none;
   border-radius: 15px;
-  background-color: rgb(255, 192, 123);
-  color: rgb(8, 9, 11);
+  background-color: var(--main-color);
+  color: var(--dark);
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
@@ -487,16 +501,16 @@ body {
 .modal-new-task__new-task-btn:hover, .modal-new-task__edit-task-btn:hover,
 .modal-edit-task__new-task-btn:hover,
 .modal-edit-task__edit-task-btn:hover {
-  color: rgb(255, 192, 123);
-  border: 1px solid rgb(255, 192, 123);
-  background-color: rgb(26, 28, 30);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  background-color: var(--gray);
 }
 
 .modal-settings {
   display: none;
 }
 .modal-settings__author {
-  color: rgba(255, 192, 123, 0.3);
+  color: rgba(var(--main-color), 0.3);
   font-style: italic;
 }
 .modal-settings__input {
@@ -529,8 +543,8 @@ body {
   padding: 10px;
   border: none;
   border-radius: 15px;
-  background-color: rgb(255, 192, 123);
-  color: rgb(8, 9, 11);
+  background-color: var(--main-color);
+  color: var(--dark);
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
@@ -538,11 +552,11 @@ body {
   cursor: pointer;
 }
 .modal-settings__btn:hover {
-  color: rgb(255, 192, 123);
-  border: 1px solid rgb(255, 192, 123);
-  background-color: rgb(26, 28, 30);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  background-color: var(--gray);
 }
 
 .active {
-  color: rgb(255, 192, 123);
+  color: var(--main-color);
 }/*# sourceMappingURL=style.css.map */
