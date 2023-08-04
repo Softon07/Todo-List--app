@@ -19,6 +19,7 @@ const completedCheckbox = document.querySelector('#completed-checkbox');
 const tasksBox = document.querySelector('.tasks-box');
 const searchTask = document.querySelector('.header__search');
 const headerName = document.querySelector('.header__name');
+const headerOrderBtn = document.querySelector('.header__order-button');
 
 const footerBoxes = document.querySelector('.footer__boxes');
 const footerBox = document.createElement('button');
@@ -216,8 +217,6 @@ const updateHeaderTitle = (categoryName, taskCount) => {
     headerName.innerHTML = `<i class="category-icon ${iconClass}"></i> ${categoryName} (${taskCount})`;
 };
 
-
-
 const showAllTasks = () => {
     currentPage = 1;
     updateFooterBoxes();
@@ -238,7 +237,6 @@ const showImportantTasks = () => {
     addFooterBox();
     updateHeaderTitle('Important', importantTasks.length);
 };
-
 
 const handleEditTask = task => {
     const clickedTask = task.target.closest('.task');
@@ -582,4 +580,3 @@ saveSettingsBtn.addEventListener('click', saveSettings);
 closeSettingsBtn.addEventListener('click', closeSettingsModal);
 
 searchTask.addEventListener('input', searchForTask);
-
